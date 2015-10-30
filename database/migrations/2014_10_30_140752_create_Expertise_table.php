@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGenderTable extends Migration
+class CreateExpertiseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,11 @@ class CreateGenderTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('Expertise', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+        });
+        
     }
 
     /**
@@ -22,6 +26,6 @@ class CreateGenderTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('Expertise');
     }
 }

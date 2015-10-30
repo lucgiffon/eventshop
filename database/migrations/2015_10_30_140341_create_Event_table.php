@@ -23,6 +23,7 @@ class CreateEventTable extends Migration
             $table->string('mailcontact');
             $table->text('description');
             
+            
         });
     }
 

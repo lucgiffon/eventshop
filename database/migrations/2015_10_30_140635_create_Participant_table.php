@@ -12,17 +12,26 @@ class CreateParticipantTable extends Migration
      */
     public function up()
     {
-        Schema::create('Event', function(Blueprint $table) {
+        Schema::create('Participant', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            //$table->subtitle('subtitle', 500);
-            $table->string('logo');
-            $table->date('begindate');
-            $table->date('enddate');
+            $table->string('email')->unique();
+            $table->integer('idgender')->unsigned();
+            $table->string('lastname');
+            $table->string('firstname');
+            $table->integer('idexpertise')->unsigned();
+            $table->string('phonenumber');
             $table->string('address');
-            $table->string('mailcontact');
-            $table->text('description');
-            
+            $table->string('department');
+            $table->string('country');            
+        });
+        
+        Schema::table('Participant', function(Blueprint $table) {
+        $table->foreign('idgender')->references('id')->on('Gender')
+                                ->onDelete('restrict')
+                                ->onUpdate('cascade');
+        $table->foreign('idexpertise')->references('id')->on('Expertise')
+                                ->onDelete('restrict')
+                                ->onUpdate('cascade');
         });
     }
 
@@ -33,6 +42,10 @@ class CreateParticipantTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('Participant', function(Blueprint $table) {
+                $table->dropForeign('Participant_idgender_foreign');
+                $table->dropForeign('Participant_idexpertise_foreign');
+        });        
+        Schema::drop('Participant');
     }
 }
