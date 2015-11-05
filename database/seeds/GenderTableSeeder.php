@@ -11,6 +11,16 @@ class GenderTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('Gender')->delete();
+
+        DB::table('Gender')->insert([
+            'id' => 1,
+            'name' => "Monsieur"
+        ]);
+
+        DB::table('Gender')->insert([
+            'id' => 2,
+            'name' => "Madame"
+        ]);
     }
 }

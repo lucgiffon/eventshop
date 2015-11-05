@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +16,9 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-
+        $this->call(GenderTableSeeder::class);
+        $this->call(ExpertiseTableSeeder::class);
+        $this->call(EventTableSeeder::class);
         Model::reguard();
     }
 }

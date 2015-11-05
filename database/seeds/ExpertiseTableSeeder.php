@@ -11,6 +11,21 @@ class ExpertiseTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('Expertise')->delete();
+
+        DB::table('Expertise')->insert([
+            'id' => 1,
+            'name' => "débutant"
+        ]);
+
+        DB::table('Expertise')->insert([
+            'id' => 2,
+            'name' => "confirmé"
+        ]);
+
+        DB::table('Expertise')->insert([
+            'id' => 3,
+            'name' => "expert"
+        ]);
     }
 }

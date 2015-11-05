@@ -18,7 +18,7 @@ class EventController extends Controller
 
     public function home()
     {
-       $eventsMostPopular = Event::find(1)->first();
+        $eventsMostPopular = Event::find(1)->first();
 
         $eventsOurSelection = EventSelected::All();
 
