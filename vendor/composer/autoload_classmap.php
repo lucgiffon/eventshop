@@ -9,8 +9,8 @@ return array(
     'CreateEatTable' => $baseDir . '/database/migrations/2015_10_30_140821_create_Eat_table.php',
     'CreateEventPictureTable' => $baseDir . '/database/migrations/2015_10_30_140705_create_EventPicture_table.php',
     'CreateEventTable' => $baseDir . '/database/migrations/2015_10_30_140341_create_Event_table.php',
-    'CreateExpertiseTable' => $baseDir . '/database/migrations/2015_10_30_140752_create_Expertise_table.php',
-    'CreateGenderTable' => $baseDir . '/database/migrations/2015_10_30_140734_create_Gender_table.php',
+    'CreateExpertiseTable' => $baseDir . '/database/migrations/2014_10_30_140752_create_Expertise_table.php',
+    'CreateGenderTable' => $baseDir . '/database/migrations/2014_10_30_140734_create_Gender_table.php',
     'CreateParticipantTable' => $baseDir . '/database/migrations/2015_10_30_140635_create_Participant_table.php',
     'CreateParticipateTable' => $baseDir . '/database/migrations/2015_10_30_140653_create_Participate_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -522,4 +522,5 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'seedertest' => $baseDir . '/database/seeds/seedertest.php',
 );
