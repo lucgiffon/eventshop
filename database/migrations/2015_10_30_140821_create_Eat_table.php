@@ -39,9 +39,9 @@ class CreateEatTable extends Migration
     public function down()
     {
         Schema::table('Eat', function(Blueprint $table) {
-                $table->dropForeign('Eat_idevent_foreign');
-                $table->dropForeign('Eat_idparticipant_foreign');
-        });        
-        Schema::drop('Eat');  
+        $table->dropForeign('Eat_idevent_foreign');
+        $table->dropForeign('Eat_idparticipant_foreign');
+    });
+        Schema::drop('Eat');
     }
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Event;
+use App\EventSelected;
 
 class EventController extends Controller
 {
@@ -14,6 +15,20 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function home()
+    {
+       $eventsMostPopular = Event::find(1)->first();
+
+        $eventsOurSelection = EventSelected::All();
+
+        //$eventsNew = Event
+
+        return view('home', ['eventsArray_MostPopular' => $eventsMostPopular,
+                                'eventsArray_OurSelection' => $eventsOurSelection]);
+
+    }
+
     public function index()
     {
         //

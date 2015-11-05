@@ -1,34 +1,29 @@
  <!-- Header Carousel -->
+
     <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <?php
+            $isActive = true;
+            ?>
+            @foreach($eventsArray_OurSelection as $k => $event)
+                <li data-target="#myCarousel" data-slide-to="$k" class="<?php if($isActive) { echo "active"; $isActive = false; } ?>"></li>
+            @endforeach
         </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div class="item active">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080/E08283/&amp;text=Évènement Un');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption événement 1</h2>
+            <?php
+            $isActive = true;
+            ?>
+            @foreach($eventsArray_OurSelection as $event)
+                <div class="item <?php if($isActive) { echo "active"; $isActive = false; } ?>">
+                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080/E08283/&amp;text=Évènement Un');"></div>
+                    <div class="carousel-caption">
+                        <h2>{{ $event->title }}</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080/BE90D4/&amp;text=Évènement Deux');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption événement 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080/52B3D9/&amp;text=Évènement Trois');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption événement 3</h2>
-                </div>
-            </div>
+            @endforeach
         </div>
-
         <!-- Controls -->
         <a class="left carousel-control" href="#myCarousel" data-slide="prev">
             <span class="icon-prev"></span>
