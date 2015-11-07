@@ -42,11 +42,19 @@ class EventTableSeeder extends Seeder
 
     }
 
-
+    /**
+     * Return a random url for logo
+     *
+     * @return string
+     */
     private function randLogo()
     {
-        $arrayColor = array("00CC00", "00FFFF", "3366FF", "FF00FF", "FF5050", "FFCC00");
-        return "http://placehold.it/100/" . $arrayColor[rand(0, 5)] . "/";
+        $color = "";
+        while (strlen($color) < 6)
+        {
+            $color .= rand(0,9);
+        }
+        return "http://placehold.it/100/" . $color . "/";
     }
 
     /**
@@ -58,7 +66,7 @@ class EventTableSeeder extends Seeder
     {
         DB::table('Event')->delete();
 
-        for($i = 0; $i < 100; ++$i)
+        for($i = 1; $i <= 100; ++$i)
         {
             if ($i % 3 == 0)
             {

@@ -11,6 +11,14 @@ class ParticipateTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('Participate')->delete();
+
+        for ($i = 1; $i <= 100; ++$i) {
+            DB::table('Participate')->insert([
+                'idparticipant' => rand(1, 1000),
+                'idevent' => rand(1, 100)
+            ]);
+
+        }
     }
 }

@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call(GenderTableSeeder::class);
         $this->call(ExpertiseTableSeeder::class);
         $this->call(EventTableSeeder::class);
+        $this->call(EventpictureTableSeeder::class);
+        $this->call(ParticipantTableSeeder::class);
+        $this->call(ParticipateTableSeeder::class);
+        //$this->call(EatTableSeeder::class);
         Model::reguard();
     }
 }
