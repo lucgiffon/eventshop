@@ -32,10 +32,7 @@
                 'eventCompany'=>"compagnie",
                 'eventEmail'=>$eventsArray_MostPopular->mailcontact,
                 'eventMessage'=>$eventsArray_MostPopular->description,
-                'titleDescr1'=>"descriptioN2",
-                'frontMess1'=>"frontmess1",
-                'titleDescr2'=>"titledesc2",
-                'frontMess2'=>"Frontmess2"])
+                'frontMess1'=>"description de l'evenement",])
 
             <div class="col-md-4 col-sm-4">
                 <div class="card-container">
