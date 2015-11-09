@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Event;
 
 class ListEventController extends Controller
 {
+
+
+    public function home()
+    {
+        $eventsShowAll = Event::All();
+        return view('listEvent', ['eventsShowAll' => $eventsShowAll]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +26,7 @@ class ListEventController extends Controller
      */
     public function index()
     {
-        //
+       //
     }
 
     /**
