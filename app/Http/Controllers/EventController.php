@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Event;
 use App\EventSelected;
@@ -18,14 +16,16 @@ class EventController extends Controller
 
     public function home()
     {
-        $eventsMostPopular = Event::find(1)->first();
+        $eventsMostPopular = Event::All()->first(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SIDEE PAR LUC
 
-        $eventsOurSelection = EventSelected::All();
+        $idEventSelected = EventSelected::All();
+        $eventsOurSelection = Event::findMany($idEventSelected);
 
-        //$eventsNew = Event
+        $eventsNewest = Event::orderBy('id', 'DESC')->take(4)->get();
 
         return view('home', ['eventsArray_MostPopular' => $eventsMostPopular,
-                                'eventsArray_OurSelection' => $eventsOurSelection]);
+                            'eventsArray_OurSelection' => $eventsOurSelection,
+                            'eventsArray_Newest' => $eventsNewest]);
 
     }
 
