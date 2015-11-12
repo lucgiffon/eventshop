@@ -9,9 +9,9 @@ Admin::model(App\Event::class)->title('Evènements')->filters(function ()
     })->columns(function ()
     {
         Column::string('title', 'Titre');
-        Column::image('logo');
-        Column::date('begindate', 'Date de début')->format('medium', 'none');
-        //Column::date('enddate', 'Date de fin')->format('medium', 'none');
+        Column::image('logo', 'Logo');
+        Column::date('begindate', 'Début')->format('medium', 'none');
+        Column::date('enddate', 'Fin')->format('medium', 'none');
         Column::string('address', 'Adresse');
         Column::string('mailcontact', 'Mail');
         Column::string('description', 'Description');
@@ -27,7 +27,7 @@ Admin::model(App\Event::class)->title('Evènements')->filters(function ()
         FormItem::text('title', 'Titre')->required();
         FormItem::image('logo', 'Logo');
         FormItem::date('begindate', 'Date de début')->required();
-        //FormItem::date('enddate', 'Date de fin')->required();
+        FormItem::date('enddate', 'Date de fin')->required();
         FormItem::text('address', 'Addresse')->required();
         FormItem::text('mailcontact', 'Mail')->required();
         FormItem::ckeditor('description', 'Description')->required();

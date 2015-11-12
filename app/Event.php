@@ -5,7 +5,6 @@ namespace App;
 use SleepingOwl\Models\Interfaces\ModelWithImageFieldsInterface;
 use SleepingOwl\Models\SleepingOwlModel;
 use SleepingOwl\Models\Traits\ModelWithImageOrFileFieldsTrait;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
 {
@@ -14,10 +13,10 @@ class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
     use ModelWithImageOrFileFieldsTrait;
 
     protected $fillable = [
-        'titre',
+        'title',
         'logo',
         'begindate',
-        //'enddate',
+        'enddate',
         'address',
         'mailcontact',
         'description'
@@ -31,13 +30,13 @@ class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
     public function getImageFields()
     {
         return [
-            'logo' => '' // rajouter le path des images chargés sur le site
+            'logo' => ''
         ];
     }
 
     public function getDates()
     {
-        return array_merge(parent::getDates(), ['begindate']);
+        return array_merge(parent::getDates(), ['begindate', 'enddate']);
     }
 
     /*
