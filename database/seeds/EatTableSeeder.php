@@ -17,12 +17,13 @@ class EatTableSeeder extends Seeder
 
         for($i = 1; $i <= 500; ++$i)
         {
-            $idevent = Participate::where('votes', '>', 100)->firstOrFail();
+            $idevent = Participate::where('idparticipant', '=', $i)->first()->idevent;
+            $date = Event::where('id', '=', $idevent)->firstOrFail()->date;
             DB::table('Eat')->insert([
                 'idparticipant' => $i,
-                // date
-                // idevent
-            ]);
+                'date' => $date,
+                'idevent' => idevent,
+                ]);
 
 
         }
