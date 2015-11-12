@@ -16,7 +16,7 @@ class EventController extends Controller
 
     public function home()
     {
-        $eventsMostPopular = Event::All()->first(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SIDEE PAR LUC
+        $eventsMostPopular = Event::All(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SIDEE PAR LUC
 
         $idEventSelected = EventSelected::All();
         $eventsOurSelection = Event::findMany($idEventSelected);
@@ -27,6 +27,13 @@ class EventController extends Controller
                             'eventsArray_OurSelection' => $eventsOurSelection,
                             'eventsArray_Newest' => $eventsNewest]);
 
+    }
+
+    public function listEvent()
+    {
+        $eventsShowAll = Event::paginate(15);
+
+        return view('listEvent', ['eventsShowAll' => $eventsShowAll]);
     }
 
     public function index()

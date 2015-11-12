@@ -10,13 +10,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">EventShop</a>
+                <a class="navbar-brand" href="./">EventShop</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="listEvent.blade.php">Évènements</a>
+                        <a href="listEvent">Évènements</a>
                     </li>
                     <li>
                         <a href="contact.html">Contactez-nous</a>
