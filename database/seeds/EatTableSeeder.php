@@ -17,7 +17,7 @@ class EatTableSeeder extends Seeder
 
         for($i = 1; $i <= 500; ++$i)
         {
-            $idevent = Participate::where('votes', '>', 100)->firstOrFail();
+            //$idevent = Participate::where('votes', '>', 100)->firstOrFail();
             DB::table('Eat')->insert([
                 'idparticipant' => $i,
                 // date
