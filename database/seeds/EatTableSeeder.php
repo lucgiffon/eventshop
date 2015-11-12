@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Event;
+use App\Participate;
 
 class EatTableSeeder extends Seeder
 {
@@ -16,12 +17,11 @@ class EatTableSeeder extends Seeder
 
         for($i = 1; $i <= 500; ++$i)
         {
+            $idevent = Participate::where('votes', '>', 100)->firstOrFail();
             DB::table('Eat')->insert([
-                //id,
                 'idparticipant' => $i,
-                //  . ((int) $i/6 + 1) . ";"
-                'date' => DB::table('Event')->,
-                'idevent' => (int) $i/6
+                // date
+                // idevent
             ]);
 
 
