@@ -10,7 +10,7 @@ class EventController extends Controller
 {
     public function home()
     {
-        $eventsMostPopular = Event::All(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SIDEE PAR LUC
+        $eventsMostPopular = Event::All(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
 
         $idEventSelected = EventSelected::All();
         $eventsOurSelection = Event::findMany($idEventSelected);
