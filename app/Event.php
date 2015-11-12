@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Eloquent
+class Event extends Model
 {
     protected $table = "Event";
 

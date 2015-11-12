@@ -15,17 +15,19 @@ class EatTableSeeder extends Seeder
     {
         DB::table('Eat')->delete();
 
-        for($i = 1; $i <= 500; ++$i)
+        foreach(Participate::all() as $participation)
         {
-            $idevent = Participate::where('idparticipant', '=', $i)->first()->idevent;
-            $date = Event::where('id', '=', $idevent)->firstOrFail()->date;
-            DB::table('Eat')->insert([
-                'idparticipant' => $i,
-                'date' => $date,
-                'idevent' => idevent,
+            if ($participation->idparticipant % 2 == 0)
+            {
+                $idparticipant = $participation->idparticipant;
+                $idevent = $participation->idevent;
+                $date = Event::where('id', '=', $idevent)->first()->begindate;
+                DB::table('Eat')->insert([
+                    'idparticipant' => $idparticipant,
+                    'date' => $date,
+                    'idevent' => $idevent,
                 ]);
-
-
+            }
         }
     }
 }
