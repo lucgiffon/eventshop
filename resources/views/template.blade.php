@@ -33,10 +33,21 @@
 
 <body>
 	@include('nav')
+
+    <div class="container">
+	    @yield('contenu')
 	
-	@yield('contenu')
-	
-	@include('footer')
+	    @include('footer')
+    </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--Dynamic scripts added from a view would be pasted here-->
+    @yield('homescripts')
 </body>
 
 </html>

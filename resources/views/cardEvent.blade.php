@@ -27,11 +27,11 @@
 			</div> <!-- end front panel -->
 			<div class="back">
 				<div class="header">
-					<h5 class="motto">{!!$eventMessage!!}</h5>
+					<h5 class="motto">{{ $eventMessage }}</h5>
 				</div>
 				<div class="content">
 					<div class="main">
-						<p>{{$frontMess1}}</p>
+						<p>{!! $frontMess1 !!}</p>
 					</div>
 				</div>
 				<div class="footer">
