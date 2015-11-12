@@ -12,5 +12,4 @@
 */
 
 Route::get('/', 'EventController@home');
-
-//Route::get('/', 'ListEventController@home');
+Route::get('listEvent', 'EventController@listEvent');

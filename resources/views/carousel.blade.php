@@ -1,22 +1,16 @@
  <!-- Header Carousel -->
-
+</div>
     <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <?php
-            $isActive = true;
-            ?>
             @foreach($eventsArray_OurSelection as $k => $event)
-                <li data-target="#myCarousel" data-slide-to="$k" class="<?php if($isActive) { echo "active"; $isActive = false; } ?>"></li>
+                <li data-target="#myCarousel" data-slide-to="<?php echo $k; ?>" class="<?php if($k == 0) { echo "active"; } ?>"></li>
             @endforeach
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <?php
-            $isActive = true;
-            ?>
-            @foreach($eventsArray_OurSelection as $event)
-                <div class="item <?php if($isActive) { echo "active"; $isActive = false; } ?>">
+            @foreach($eventsArray_OurSelection as $k => $event)
+                <div class="item <?php if($k == 0) { echo "active"; } ?>">
                     <div class="fill" style="background-image:url('http://placehold.it/1900x1080/E08283/&amp;text=Évènement Un');"></div>
                     <div class="carousel-caption">
                         <h2>{{ $event->title }}</h2>
@@ -32,11 +26,4 @@
             <span class="icon-next"></span>
         </a>
     </header>
-	
-	
-	    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
+<div class="container">
