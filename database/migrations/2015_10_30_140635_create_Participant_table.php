@@ -27,10 +27,10 @@ class CreateParticipantTable extends Migration
         
         Schema::table('Participant', function(Blueprint $table) {
         $table->foreign('idgender')->references('id')->on('Gender')
-                                ->onDelete('restrict')
+                                ->onDelete('cascade')
                                 ->onUpdate('cascade');
         $table->foreign('idexpertise')->references('id')->on('Expertise')
-                                ->onDelete('restrict')
+                                ->onDelete('cascade')
                                 ->onUpdate('cascade');
         });
     }
