@@ -50,7 +50,6 @@ return array(
     'ClassPreloader\\Parser\\DirVisitor' => $vendorDir . '/classpreloader/classpreloader/src/Parser/DirVisitor.php',
     'ClassPreloader\\Parser\\FileVisitor' => $vendorDir . '/classpreloader/classpreloader/src/Parser/FileVisitor.php',
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/Parser/NodeTraverser.php',
-
     'CreateAdministratorsTable' => $baseDir . '/database/migrations/2014_10_12_104748_create_administrators_table.php',
     'CreateEatTable' => $baseDir . '/database/migrations/2015_10_30_140821_create_Eat_table.php',
     'CreateEventPictureTable' => $baseDir . '/database/migrations/2015_10_30_140705_create_EventPicture_table.php',
