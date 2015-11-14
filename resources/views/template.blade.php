@@ -36,7 +36,9 @@
 
     <div class="container">
 	    @yield('contenu')
-	
+
+        <hr>
+
 	    @include('footer')
     </div>
 

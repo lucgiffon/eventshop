@@ -75,7 +75,7 @@ class Control extends BaseColumn
 		$content .= $this->formBuilder->open([
 			'method' => 'delete',
 			'url'    => $this->router->routeToDestroy($this->modelItem->getAlias(), $instance->getKey()),
-			'class'  => 'inline-block'
+			'class'  => ''
 		]);
 		$attributes = [
 			'class'       => 'btn btn-danger btn-sm btn-delete',

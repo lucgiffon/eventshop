@@ -15,6 +15,6 @@
  * 		});
  */
 
-Admin::menu()->url('/')->label('Sa part de là')->icon('fa-dashboard')->uses('\SleepingOwl\Admin\Controllers\DummyController@getIndex');
+Admin::menu()->url('/')->label('Accueil')->icon('fa-dashboard')->uses('\App\Http\Controllers\AdminController@home');
 Admin::menu(App\Event::class)->icon('fa-calendar');
 Admin::menu(App\Participant::class)->icon('fa-users');

@@ -10,6 +10,7 @@ Admin::model(App\Event::class)->title('Evènements')->filters(function ()
     {
         Column::string('title', 'Titre');
         Column::image('logo', 'Logo');
+        Column::count('participant', 'Participants')->append(Column::filter('event_id')->model('App\Participant'));
         Column::date('begindate', 'Début')->format('medium', 'none');
         Column::date('enddate', 'Fin')->format('medium', 'none');
         Column::string('address', 'Adresse');

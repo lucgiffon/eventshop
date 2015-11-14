@@ -1,13 +1,19 @@
 
 <div class="row">
-    @include('admin._partials.index_info_block', ['title' => $contactsCount,
-        'label' => 'Contacts',
-        'model' => 'event',
+    <div class="col-lg-12">
+        <h1 class="page-header">Bienvenue sur l'administration</h1>
+    </div>
+</div>
+
+<div class="row">
+    @include('admin.partial.infoBlock', ['title' => $eventCount,
+        'label' => 'Événement',
+        'model' => 'events',
         'style' => 'primary',
         'icon' => 'fa-calendar'])
-    @include('admin._partials.index_info_block', ['title' => $companiesCount,
-        'label' => 'Companies',
-        'model' => 'participant',
+    @include('admin.partial.infoBlock', ['title' => $participantCount,
+        'label' => 'Participants',
+        'model' => 'participants',
         'style' => 'green',
         'icon' => 'fa-users'])
 </div>

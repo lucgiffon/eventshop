@@ -1,6 +1,4 @@
 
-<hr>
-
 <!-- Footer -->
 <footer>
     <div class="row">

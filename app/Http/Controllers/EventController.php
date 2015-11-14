@@ -10,7 +10,7 @@ class EventController extends Controller
 {
     public function home()
     {
-        $eventsMostPopular = Event::All(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
+        $eventsMostPopular = Event::orderBy('id', 'ASC')->take(3)->get(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
 
         $idEventSelected = EventSelected::All();
         $eventsOurSelection = Event::findMany($idEventSelected);
@@ -20,7 +20,6 @@ class EventController extends Controller
         return view('home', ['eventsArray_MostPopular' => $eventsMostPopular,
                             'eventsArray_OurSelection' => $eventsOurSelection,
                             'eventsArray_Newest' => $eventsNewest]);
-
     }
 
     public function listEvent()

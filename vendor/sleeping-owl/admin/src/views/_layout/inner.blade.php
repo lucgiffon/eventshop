@@ -9,6 +9,10 @@
 		</nav>
 		<div id="page-wrapper">
 			@yield('innerContent')
+
+			<hr>
+
+			@include('footer')
 		</div>
 	</div>
 @stop

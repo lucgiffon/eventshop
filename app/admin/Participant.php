@@ -1,11 +1,13 @@
 <?php
 
-Admin::model(App\Participant::class)->title('Participants')->filters(function ()
+Admin::model(App\Participant::class)->title('Participants')->with('event')->filters(function ()
 {
     })->columns(function ()
     {
         Column::string('lastname', 'Nom');
         Column::string('firstname', 'Prénom');
+        //Column::count('participate', 'Evénement')->append(Column::filter('participant_id')->model('App\Participate'));
+        Column::lists('event.title', 'Evenements');
         Column::string('email', 'Mail');
         Column::string('idgender', 'Sexe');
         Column::string('idexpertise', 'Domaine d\'expertise');

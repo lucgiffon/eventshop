@@ -39,6 +39,11 @@ class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
         return array_merge(parent::getDates(), ['begindate', 'enddate']);
     }
 
+    public function participant()
+    {
+        return $this->belongsToMany('App\Participant');
+    }
+
     /*
     public function country()
     {

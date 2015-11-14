@@ -30,7 +30,7 @@
                 Événements Populaires
             </h1>
         </div>
-        @foreach($eventsArray_OurSelection as $event)
+        @foreach($eventsArray_MostPopular as $event)
             @include('cardEvent', ['col_md'=>"4", 'col_sm'=>"4",
                 'title'=>$event->title,
                 'subTitles'=>"sous-titre",
