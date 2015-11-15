@@ -10,10 +10,8 @@ class Participant extends SleepingOwlModel
 
     protected $fillable = [
         'email',
-        'idgender',
         'lastname',
         'firstname',
-        'idexpertise',
         'phonenumber',
         'address',
         'department',
@@ -28,5 +26,15 @@ class Participant extends SleepingOwlModel
     public function event()
     {
         return $this->belongsToMany('App\Event');
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo('App\Gender');
+    }
+
+    public function expertise()
+    {
+        return $this->belongsTo('App\Expertise');
     }
 }

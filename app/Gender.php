@@ -4,17 +4,21 @@ namespace App;
 
 use SleepingOwl\Models\SleepingOwlModel;
 
-class Participate extends SleepingOwlModel
+class Gender extends SleepingOwlModel
 {
-    protected $table = "participate";
+    protected $table = "gender";
 
     protected $fillable = [
-        'participant_id',
-        'event_id'
+        'name'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
+
+    function Participant()
+    {
+        return $this->hasMany('App\Participant');
+    }
 }

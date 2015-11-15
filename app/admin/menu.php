@@ -18,3 +18,5 @@
 Admin::menu()->url('/')->label('Accueil')->icon('fa-dashboard')->uses('\App\Http\Controllers\AdminController@home');
 Admin::menu(App\Event::class)->icon('fa-calendar');
 Admin::menu(App\Participant::class)->icon('fa-users');
+Admin::menu(App\Gender::class)->icon('fa-intersex');
+Admin::menu(App\Expertise::class)->icon('fa-lemon-o');

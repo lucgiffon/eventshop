@@ -10,7 +10,12 @@ class EventController extends Controller
 {
     public function home()
     {
-        $eventsMostPopular = Event::orderBy('id', 'ASC')->take(3)->get(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
+        //$eventsMostPopular = Event::orderBy('id', 'ASC')->take(3)->get(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
+
+        $eventsMostPopular = Event::with('participant')->get()->sortBy(function($eventsMostPopular)
+        {
+            return $eventsMostPopular->participant->count();
+        }, SORT_REGULAR, true)->take(3);
 
         $idEventSelected = EventSelected::All();
         $eventsOurSelection = Event::findMany($idEventSelected);

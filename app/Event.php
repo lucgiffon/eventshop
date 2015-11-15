@@ -27,6 +27,16 @@ class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
         'updated_at'
     ];
 
+    public function participant()
+    {
+        return $this->belongsToMany('App\Participant');
+    }
+
+    public static function getList()
+    {
+        return static::lists('title', 'id');
+    }
+
     public function getImageFields()
     {
         return [
@@ -38,37 +48,4 @@ class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
     {
         return array_merge(parent::getDates(), ['begindate', 'enddate']);
     }
-
-    public function participant()
-    {
-        return $this->belongsToMany('App\Participant');
-    }
-
-    /*
-    public function country()
-    {
-        return $this->belongsTo('Country');
-    }
-
-    public function companies()
-    {
-        return $this->belongsToMany('Company');
-    }
-
-    public function getFullNameAttribute()
-    {
-        return implode(' ', [
-            $this->firstName,
-            $this->lastName
-        ]);
-    }
-
-    public function setCompaniesAttribute($companies)
-    {
-        $this->companies()->detach();
-        if ( ! $companies) return;
-        if ( ! $this->exists) $this->save();
-        $this->companies()->attach($companies);
-    }
-    */
 }
