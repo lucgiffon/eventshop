@@ -14,13 +14,17 @@ class CreateEventPictureTable extends Migration
     {
         Schema::create('EventPicture', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('idevent')->unsigned();
+            $table->integer('event_id')->unsigned();
             $table->string('picture')->unique();
             $table->boolean('isprincipal');
+            $table->timestamp('created_at')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
         
         Schema::table('EventPicture', function(Blueprint $table) {
-        $table->foreign('idevent')->references('id')->on('Event')
+        $table->foreign('event_id')->references('id')->on('Event')
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade');
         });    
@@ -35,7 +39,7 @@ class CreateEventPictureTable extends Migration
     public function down()
     {
         Schema::table('EventPicture', function(Blueprint $table) {
-                $table->dropForeign('EventPicture_idevent_foreign');
+                $table->dropForeign('EventPicture_event_id_foreign');
         });        
         Schema::drop('EventPicture');    
         

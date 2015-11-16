@@ -13,11 +13,11 @@ class CreateEventSelectedTable extends Migration
     public function up()
     {
         Schema::create('EventSelected', function(Blueprint $table) {
-            $table->integer('idevent')->unsigned();
-            $table->primary(['idevent']);
+            $table->integer('event_id')->unsigned();
+            $table->primary(['event_id']);
         });
         Schema::table('EventSelected', function(Blueprint $table) {
-            $table->foreign('idevent')->references('id')->on('Event')
+            $table->foreign('event_id')->references('id')->on('Event')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -32,7 +32,7 @@ class CreateEventSelectedTable extends Migration
     public function down()
     {
         Schema::table('EventSelected', function(Blueprint $table) {
-            $table->dropForeign('EventSelected_idevent_foreign');
+            $table->dropForeign('EventSelected_event_id_foreign');
         });
         Schema::drop('EventSelected');
     }

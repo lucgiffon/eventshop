@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEatTable extends Migration
+class CreateEventParticipantTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,27 +12,25 @@ class CreateEatTable extends Migration
      */
     public function up()
     {
-        Schema::create('Eat', function(Blueprint $table) {
+        Schema::create('event_participant', function(Blueprint $table) {
             $table->integer('participant_id')->unsigned();
-            $table->date('date');
             $table->integer('event_id')->unsigned();
-            $table->primary(['participant_id', 'date']);
+            $table->primary(['participant_id', 'event_id']);
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
+            
         });
-        Schema::table('Eat', function(Blueprint $table) {
-        $table->foreign('event_id')->references('id')->on('Event')
-                                ->onDelete('cascade')
-                                ->onUpdate('cascade');
-
+        
+        Schema::table('event_participant', function(Blueprint $table) {
         $table->foreign('participant_id')->references('id')->on('Participant')
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade');
-
-        }); 
-
+        $table->foreign('event_id')->references('id')->on('Event')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -42,10 +40,10 @@ class CreateEatTable extends Migration
      */
     public function down()
     {
-        Schema::table('Eat', function(Blueprint $table) {
-        $table->dropForeign('Eat_event_id_foreign');
-        $table->dropForeign('Eat_participant_id_foreign');
-    });
-        Schema::drop('Eat');
+        Schema::table('event_participant', function(Blueprint $table) {
+                $table->dropForeign('event_participant_participant_id_foreign');
+                $table->dropForeign('event_participant_event_id_foreign');
+        });        
+        Schema::drop('event_participant');
     }
 }
