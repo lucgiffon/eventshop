@@ -34,10 +34,10 @@ class ParticipantTableSeeder extends Seeder
             DB::table('Participant')->insert([
                 //id,
                 'email' => "participant" . $i . "@eventshop.mail",
-                'idgender' => rand(1, 2),
+                'gender_id' => rand(1, 2),
                 'lastname' => "lastname" . $i,
                 'firstname' => "firstname" . $i,
-                'idexpertise' => rand(1,3),
+                'expertise_id' => rand(1,3),
                 'phonenumber' => $phoneNumber,
                 'address' => $i . "avenue du participant - 13009 Luminy",
                 'department' => "departement" . $i,

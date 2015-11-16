@@ -40,18 +40,18 @@ class EventpictureTableSeeder extends Seeder
             {
                 $isprincipal = 0;
             }
-            $idevent = (int) ($i/3);
-            if ($idevent < 1)
+            $event_id = (int) ($i/3);
+            if ($event_id < 1)
             {
-                $idevent += 1;
+                $event_id += 1;
             }
-            elseif ($idevent > 100)
+            elseif ($event_id > 100)
             {
-                $idevent -= 1;
+                $event_id -= 1;
             }
             DB::table('EventPicture')->insert([
                 //id,
-                'idevent' => $idevent,
+                'event_id' => $event_id,
                 'picture' => $picture,
                 'isprincipal' => $isprincipal,
             ]);

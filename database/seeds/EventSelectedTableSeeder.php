@@ -22,7 +22,7 @@ class EventSelectedTableSeeder extends Seeder
         for($i = 1; $i <= 3; ++$i)
         {
             DB::table('EventSelected')->insert([
-                'idevent' => rand(1,100)
+                'event_id' => rand(1,100)
             ]);
         }
     }

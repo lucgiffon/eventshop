@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Event;
-use App\Participate;
+use App\Event_Participant;
 
 class EatTableSeeder extends Seeder
 {
@@ -15,17 +15,17 @@ class EatTableSeeder extends Seeder
     {
         DB::table('Eat')->delete();
 
-        foreach(Participate::all() as $participation)
+        foreach(Event_Participant::all() as $participation)
         {
             if ($participation->idparticipant % 2 == 0)
             {
-                $idparticipant = $participation->idparticipant;
-                $idevent = $participation->idevent;
-                $date = Event::where('id', '=', $idevent)->first()->begindate;
+                $participant_id = $participation->participant_id;
+                $event_id = $participation->event_id;
+                $date = Event::where('id', '=', $event_id)->first()->begindate;
                 DB::table('Eat')->insert([
-                    'idparticipant' => $idparticipant,
+                    'participant_id' => $participant_id,
                     'date' => $date,
-                    'idevent' => $idevent,
+                    'event_id' => $event_id,
                 ]);
             }
         }
