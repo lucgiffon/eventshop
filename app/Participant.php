@@ -6,7 +6,7 @@ use SleepingOwl\Models\SleepingOwlModel;
 
 class Participant extends SleepingOwlModel
 {
-    protected $table = "participant";
+    protected $table = "Participant";
 
     protected $fillable = [
         'email',
