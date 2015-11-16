@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Event_ParticipantTableSeeder::class);
         $this->call(EatTableSeeder::class);
         $this->call(EventSelectedTableSeeder::class);
+        $this->call(MessageTableSeeder::class);
         Model::reguard();
     }
 }

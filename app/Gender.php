@@ -6,16 +6,18 @@ use SleepingOwl\Models\SleepingOwlModel;
 
 class Gender extends SleepingOwlModel
 {
-    protected $table = "gender";
+    protected $table = "Gender";
 
     protected $fillable = [
         'name'
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at'
-    ];
+    public $timestamps = true;
+
+//    protected $hidden = [
+//        'created_at',
+//        'updated_at'
+//    ];
 
     function Participant()
     {

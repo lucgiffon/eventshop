@@ -6,16 +6,17 @@ use SleepingOwl\Models\SleepingOwlModel;
 
 class Expertise extends SleepingOwlModel
 {
-    protected $table = "expertise";
+    protected $table = "Expertise";
 
     protected $fillable = [
         'name'
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at'
-    ];
+    public $timestamps = true;
+//    protected $hidden = [
+//        'created_at',
+//        'updated_at'
+//    ];
 
     function Participant()
     {
