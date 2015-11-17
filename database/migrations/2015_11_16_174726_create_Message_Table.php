@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGenderTable extends Migration
+class CreateMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,17 @@ class CreateGenderTable extends Migration
      */
     public function up()
     {
-        Schema::create('Gender', function(Blueprint $table) {
+        Schema::create('Message', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('title');
+            $table->string('name');
+            $table->string('email');
+            $table->text('description');
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
-        });
-        
-    }
+        });    }
 
     /**
      * Reverse the migrations.
@@ -30,6 +31,6 @@ class CreateGenderTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Gender');
+        Schema::drop('Message');
     }
 }

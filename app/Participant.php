@@ -18,10 +18,12 @@ class Participant extends Model
         'country'
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at'
-    ];
+    public $timestamps = true;
+
+//    protected $hidden = [
+//        'created_at',
+//        'updated_at'
+//    ];
 
     public function event()
     {
