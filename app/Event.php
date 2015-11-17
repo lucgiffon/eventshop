@@ -2,15 +2,11 @@
 
 namespace App;
 
-use SleepingOwl\Models\Interfaces\ModelWithImageFieldsInterface;
-use SleepingOwl\Models\SleepingOwlModel;
-use SleepingOwl\Models\Traits\ModelWithImageOrFileFieldsTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Event extends SleepingOwlModel implements ModelWithImageFieldsInterface
+class Event extends Model
 {
     protected $table = "Event";
-
-    use ModelWithImageOrFileFieldsTrait;
 
     protected $fillable = [
         'title',

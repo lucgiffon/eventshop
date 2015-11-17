@@ -8,12 +8,12 @@
 <div class="row">
     @include('admin.partial.infoBlock', ['title' => $eventCount,
         'label' => 'Événement',
-        'model' => 'events',
-        'style' => 'primary',
+        'model' => 'Event',
+        'style' => 'info',
         'icon' => 'fa-calendar'])
     @include('admin.partial.infoBlock', ['title' => $participantCount,
         'label' => 'Participants',
-        'model' => 'participants',
-        'style' => 'green',
+        'model' => 'Participant',
+        'style' => 'success',
         'icon' => 'fa-users'])
 </div>

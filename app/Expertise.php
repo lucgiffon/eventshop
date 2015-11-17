@@ -2,11 +2,11 @@
 
 namespace App;
 
-use SleepingOwl\Models\SleepingOwlModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Expertise extends SleepingOwlModel
+class Expertise extends Model
 {
-    protected $table = "expertise";
+    protected $table = "Expertise";
 
     protected $fillable = [
         'name'

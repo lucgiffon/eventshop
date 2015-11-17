@@ -1,14 +1,22 @@
 <?php
 
-Admin::model(App\Expertise::class)->title('Domaine d\'expertise')->with('participant')->filters(function ()
+Admin::model(App\Expertise::class)->title('Domaine d\'expertise')->alias('Expertise')->display(function ()
 {
-    })->columns(function ()
-    {
-        Column::string('name', 'Nom');
-        //Column::lists('participant.firstname', 'Participants');
-        Column::count('participant', 'Participants')->append(Column::filter('expertise_id')->model(App\Participant::class));
-    })->form(function ()
-    {
-        FormItem::text('name', 'Nom')->required();
-    }
-);
+    $display = AdminDisplay::datatablesAsync();
+
+    $display->columns([
+        Column::string('name')->label('Nom'),
+        Column::count('participant')->label('Participants')->append(Column::filter('expertise_id')),
+    ]);
+
+    return $display;
+})->createAndEdit(function ()
+{
+    $form = AdminForm::form();
+
+    $form->items([
+        FormItem::text('name', 'Nom')->required()->unique(),
+    ]);
+
+    return $form;
+});

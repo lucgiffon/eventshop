@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Event;
 use App\Participant;
+use Admin;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,9 @@ class AdminController extends Controller
         $eventCount = Event::count();
         $participantCount = Participant::count();
 
-        return view('admin.index', ['eventCount' => $eventCount, 'participantCount' => $participantCount]);
+        $content = view('admin.index', ['eventCount' => $eventCount, 'participantCount' => $participantCount]);
+
+        return Admin::view($content, 'Accueil');
     }
 
     public function getSecond()

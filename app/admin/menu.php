@@ -1,22 +1,7 @@
 <?php
 
-/*
- * Describe your menu here.
- *
- * There is some simple examples what you can use:
- *
- * 		Admin::menu()->url('/')->label('Start page')->icon('fa-dashboard')->uses('\AdminController@getIndex');
- * 		Admin::menu(User::class)->icon('fa-user');
- * 		Admin::menu()->label('Menu with subitems')->icon('fa-book')->items(function ()
- * 		{
- * 			Admin::menu(\Foo\Bar::class)->icon('fa-sitemap');
- * 			Admin::menu('\Foo\Baz')->label('Overwrite model title');
- * 			Admin::menu()->url('my-page')->label('My custom page')->uses('\MyController@getMyPage');
- * 		});
- */
-
-Admin::menu()->url('/')->label('Accueil')->icon('fa-dashboard')->uses('\App\Http\Controllers\AdminController@home');
+Admin::menu()->url('/')->label('Accueil')->icon('fa-dashboard');
 Admin::menu(App\Event::class)->icon('fa-calendar');
 Admin::menu(App\Participant::class)->icon('fa-users');
-Admin::menu(App\Gender::class)->icon('fa-intersex');
 Admin::menu(App\Expertise::class)->icon('fa-lemon-o');
+Admin::menu(App\Gender::class)->icon('fa-intersex');

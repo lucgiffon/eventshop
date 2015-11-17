@@ -2,11 +2,11 @@
 
 namespace App;
 
-use SleepingOwl\Models\SleepingOwlModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Participant extends SleepingOwlModel
+class Participant extends Model
 {
-    protected $table = "participant";
+    protected $table = "Participant";
 
     protected $fillable = [
         'email',

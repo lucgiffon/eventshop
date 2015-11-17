@@ -1,14 +1,31 @@
 <?php
 
-Admin::model(App\Gender::class)->title('Genre')->with('participant')->filters(function ()
+Admin::model(App\Gender::class)->title('Genre')->alias('Gender')->display(function ()
 {
-    })->columns(function ()
-    {
-        Column::string('name', 'Nom');
-        //Column::lists('participant.firstname', 'Participants');
-        Column::count('participant', 'Participants')->append(Column::filter('gender_id')->model(App\Participant::class));
-    })->form(function ()
-    {
-        FormItem::text('name', 'Nom')->required();
-    }
-);
+    $display = AdminDisplay::datatablesAsync();
+    $display->with('participant');
+
+    $display->columns([
+        Column::string('name')->label('Nom'),
+        Column::count('participant')->label('Participants')->append(Column::filter('expertise_id')),
+    ]);
+
+    return $display;
+})->createAndEdit(function ()
+{
+    $form = AdminForm::form();
+
+    $form->items([
+        FormItem::columns()->columns([
+            [
+                FormItem::text('name', 'Nom')->required(),
+            ],
+            [
+            ],
+            [
+            ],
+        ]),
+    ]);
+
+    return $form;
+});
