@@ -4,7 +4,8 @@ $(function ()
 	{
 		e.preventDefault();
 		$(this).ekkoLightbox({
-			always_show_close: false
+			always_show_close: false,
+			type: "image"
 		});
 	});
 });
