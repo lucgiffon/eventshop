@@ -31,5 +31,19 @@ $(function ()
 		$('input[type="text"]:first').focus();
 	})();
 
+    if (typeof dataparticipantsByExpertiseCount != 'undefined') {
+        Morris.Donut({
+            element: 'participantsByExpertiseCount',
+            data: dataparticipantsByExpertiseCount,
+            colors: [ '#D2527F', '#F1A9A0', '#E26A6A']
+        });
+}
 
+    if (typeof participantsByGenderCount != 'undefined') {
+        Morris.Donut({
+            element: 'participantsByGenderCount',
+            data: dataparticipantsByGenderCount,
+            colors: ['#E9D460', '#EB9532', '#F4B350']
+        });
+    }
 });

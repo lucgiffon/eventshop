@@ -91,3 +91,8 @@ footer {
         height: 70%;
     }
 }
+
+.frontmess {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

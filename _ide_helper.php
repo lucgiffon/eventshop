@@ -12164,14 +12164,12 @@ namespace {
     class AdminTemplate extends \SleepingOwl\Admin\Templates\Facade\AdminTemplate{
         
         /**
-         * Get full view name
+         * 
          *
-         * @param string $view
-         * @return string 
          * @static 
          */
         public static function view($view){
-            return \SleepingOwl\Admin\Templates\TemplateDefault::view($view);
+            return \SleepingOwl\AdminLteTemplate\Template::view($view);
         }
         
     }

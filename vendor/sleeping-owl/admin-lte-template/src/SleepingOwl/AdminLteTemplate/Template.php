@@ -15,10 +15,13 @@ class Template implements TemplateInterface
 		AssetManager::addStyle(asset('packages/sleeping-owl/admin-lte-template/css/custom.css'));
 		AssetManager::addStyle(asset('packages/sleeping-owl/admin-lte-template/css/dataTables.bootstrap.css'));
 		AssetManager::addStyle(asset('packages/sleeping-owl/admin-lte-template/plugins/iCheck/all.css'));
+		AssetManager::addStyle('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css');
 
 		AssetManager::addScript(route('admin.lang'));
 		AssetManager::addScript('admin::default/js/jquery-1.11.0.js');
 		AssetManager::addScript('admin::default/js/bootstrap.min.js');
+		AssetManager::addScript('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js');
+		AssetManager::addScript('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js');
 		AssetManager::addScript(asset('packages/sleeping-owl/admin-lte-template/js/app.js'));
 		AssetManager::addScript(asset('packages/sleeping-owl/admin-lte-template/js/admin.js'));
 		AssetManager::addScript(asset('packages/sleeping-owl/admin-lte-template/plugins/iCheck/icheck.min.js'));

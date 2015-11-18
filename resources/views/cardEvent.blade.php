@@ -4,10 +4,10 @@
 		<div class="card">
 			<div class="front">
 				<div class="cover">
-					<img src="images/rotating_card_thumb.png"/>
+					<img src="{{$image}}"/>
 				</div>
 				<div class="user">
-					<img class="img-circle" src="images/rotating_card_profile.png"/>
+					<img class="img-circle" src="{{$logo}}"/>
 				</div>
 				<div class="content">
 					<div class="main">
@@ -31,7 +31,7 @@
 				</div>
 				<div class="content">
 					<div class="main">
-						<p>{!! $frontMess1 !!}</p>
+						<p class="frontmess">{!! str_limit($frontMess1, $limit = 200) !!}</p>
 					</div>
 				</div>
 				<div class="footer">

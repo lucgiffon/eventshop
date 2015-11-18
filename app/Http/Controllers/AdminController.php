@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Event;
+use App\Expertise;
+use App\Gender;
+use App\EventPicture;
+use App\Eat;
 use App\Participant;
 use Admin;
 
@@ -13,8 +17,35 @@ class AdminController extends Controller
     {
         $eventCount = Event::count();
         $participantCount = Participant::count();
+        $pictureCount = EventPicture::count();
+        $eatCount = Eat::count();
 
-        $content = view('admin.index', ['eventCount' => $eventCount, 'participantCount' => $participantCount]);
+        $expertises = Expertise::all();
+        $participantsByExpertiseCount = [];
+
+        foreach ($expertises as $expertise) {
+            $participantByExpertiseCount['count'] = $expertise->Participant()->count();
+            $participantByExpertiseCount['name'] = $expertise->name;
+
+            $participantsByExpertiseCount[] = $participantByExpertiseCount;
+        }
+
+        $genres = Gender::all();
+        $participantsByGenderCount = [];
+
+        foreach ($genres as $genre) {
+            $participantByGenderCount['count'] = $genre->Participant()->count();
+            $participantByGenderCount['name'] = $genre->name;
+
+            $participantsByGenderCount[] = $participantByGenderCount;
+        }
+
+        $content = view('admin.index', ['eventCount' => $eventCount,
+                                        'participantCount' => $participantCount,
+                                        'participantsByExpertiseCount' => $participantsByExpertiseCount,
+                                        'participantsByGenderCount' => $participantsByGenderCount,
+                                        'pictureCount' => $pictureCount,
+                                        'eatCount' => $eatCount]);
 
         return Admin::view($content, 'Accueil');
     }

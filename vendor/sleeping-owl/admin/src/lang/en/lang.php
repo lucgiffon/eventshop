@@ -28,7 +28,7 @@ return [
 		],
 	],
 	'table'    => [
-		'new-entry'      => 'New Entry',
+		'new-entry'      => 'Nouvelle entrée', // A CHANGER APRES TEST
 		'edit'           => 'Edit',
 		'restore'        => 'Restore',
 		'delete'         => 'Delete',

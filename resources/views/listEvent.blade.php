@@ -24,7 +24,9 @@
                 'titleDescr1'=>"descriptioN2",
                 'frontMess1'=>$event->description,
                 'titleDescr2'=>"titledesc2",
-                'frontMess2'=>"Frontmess2"])
+                'frontMess2'=>"Frontmess2",
+                'logo'=>$event->logo,
+                'image'=>$event->eventpicture->where('isprincipal', 1)->first()->picture])
         @endforeach
 
         <div class="col-lg-12 text-center">

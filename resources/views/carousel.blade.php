@@ -4,16 +4,17 @@
         <!-- Indicators -->
         <ol class="carousel-indicators">
             @foreach($eventsArray_OurSelection as $k => $event)
-                <li data-target="#myCarousel" data-slide-to="<?php echo $k; ?>" class="<?php if($k == 0) { echo "active"; } ?>"></li>
+                <li data-target="#myCarousel" data-slide-to="{{ $k }}" class="@if ($k === 0) active @endif"></li>
             @endforeach
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             @foreach($eventsArray_OurSelection as $k => $event)
-                <div class="item <?php if($k == 0) { echo "active"; } ?>">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080/E08283/&amp;text=Évènement Un');"></div>
+                <div class="item @if ($k === 0) active @endif">
+                    <div class="fill" style="background-image:url('{{ $event->eventpicture->where('isprincipal', 1)->first()->picture }}');"></div>
                     <div class="carousel-caption">
                         <h2>{{ $event->title }}</h2>
+                        <p>{{ str_limit($event->description, $limit = 1000) }}</p>
                     </div>
                 </div>
             @endforeach

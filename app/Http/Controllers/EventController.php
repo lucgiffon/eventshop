@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Event;
-use App\EventSelected;
 
 class EventController extends Controller
 {
@@ -17,8 +16,7 @@ class EventController extends Controller
             return $eventsMostPopular->participant->count();
         }, SORT_REGULAR, true)->take(3);
 
-        $idEventSelected = EventSelected::All();
-        $eventsOurSelection = Event::findMany($idEventSelected);
+        $eventsOurSelection = Event::where('selected', 1)->get();
 
         $eventsNewest = Event::orderBy('id', 'DESC')->take(4)->get();
 
@@ -29,7 +27,7 @@ class EventController extends Controller
 
     public function listEvent()
     {
-        $eventsShowAll = Event::paginate(15);
+        $eventsShowAll = Event::with('eventpicture')->paginate(15);
 
         return view('listEvent', ['eventsShowAll' => $eventsShowAll]);
     }
