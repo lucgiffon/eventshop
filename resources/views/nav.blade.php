@@ -19,7 +19,7 @@
                         <a href="listEvent">Évènements</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contactez-nous</a>
+                        <a href="contact">Contactez-nous</a>
                     </li>
                 </ul>
             </div>

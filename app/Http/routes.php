@@ -13,3 +13,4 @@
 
 Route::get('/', 'EventController@home');
 Route::get('listEvent', 'EventController@listEvent');
+Route::get('contact', 'ContactController@home');
