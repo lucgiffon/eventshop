@@ -30,7 +30,8 @@ class ContactRequest extends Request
             'EventName' => 'max:255|alpha_num',
             'EventAddr' => 'alpha_num',
             'EventBeginDate' => 'date_format:d/m/Y|after:today',
-            'EventEndDate' => 'date_format:d/m/Y|after:EventBeginDate'
+            'EventEndDate' => 'date_format:d/m/Y|after:EventBeginDate',
+            'EventPicture' => 'image'
         ];
     }
 }

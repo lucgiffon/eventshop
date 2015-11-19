@@ -48,6 +48,7 @@
                    {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
                         <div class="panel-body">
                             {!! Form::open(['url' => 'confirm']) !!}
+                            {{ csrf_field() }}
                             <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
                                 {!! $errors->first('nom', '<small class="help-block">:message</small>') !!}
