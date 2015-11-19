@@ -18,6 +18,10 @@ Admin::model(App\EventPicture::class)->title('Images des événements')->alias('
     $display->columns([
         Column::image('picture')->label('Image')->orderable(false),
         Column::string('event_id')->label('Evénement')->append(Column::filter('event_id'))->orderable(false),
+        Column::custom()->label('Principale')->callback(function ($instance)
+        {
+            return $instance->isprincipal ? '&check;' : '-';
+        })->orderable(false),
     ]);
 
     return $display;

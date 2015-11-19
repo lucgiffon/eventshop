@@ -29,6 +29,6 @@ class Expertise extends Model
 
     function Participant()
     {
-        return $this->hasMany('App\Participant', 'expertise_id');
+        return $this->hasMany('App\Participant');
     }
 }

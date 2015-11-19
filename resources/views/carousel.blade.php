@@ -14,7 +14,7 @@
                     <div class="fill" style="background-image:url('{{ $event->eventpicture->where('isprincipal', 1)->first()->picture }}');"></div>
                     <div class="carousel-caption">
                         <h2>{{ $event->title }}</h2>
-                        <p>{{ str_limit($event->description, $limit = 1000) }}</p>
+                        <p>{!! str_limit($event->description, $limit = 1000) !!}</p>
                     </div>
                 </div>
             @endforeach

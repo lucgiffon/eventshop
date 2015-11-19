@@ -45,8 +45,7 @@ class Participant extends Model
         'firstname',
         'phonenumber',
         'address',
-        'department',
-        'country'
+        'department'
     ];
 
     public $timestamps = true;

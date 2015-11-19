@@ -9,7 +9,7 @@ Admin::model(App\Event::class)->title('Evénements')->alias('Event')->display(fu
     $display->columns([
         Column::string('title')->label('Titre'),
         Column::image('logo')->label('Logo'),
-        Column::count('eventpicture')->label('Images')->append(Column::filter('event_id')->model('App\EventPicture')),
+        Column::count('eventpicture')->label('Images')->append(Column::filter('event_id')->model('App\EventPicture'))->orderable(false),
         Column::lists('participant.firstname')->label('Participants')->orderable(false),
         Column::datetime('begindate')->label('Début')->format('d/m/Y'),
         Column::datetime('enddate')->label('Fin')->format('d/m/Y'),
