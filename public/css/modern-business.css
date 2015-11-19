@@ -96,3 +96,12 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.contactform_wrapper {
+    border-color: #ddd;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius:4px 4px 0 0;
+}

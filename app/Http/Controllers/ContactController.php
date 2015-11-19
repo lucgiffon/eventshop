@@ -16,6 +16,13 @@ class ContactController extends Controller
     }
 
 
+    public function postForm(ContactRequest $request)
+    {
+        Mail::send('emails.contact', $request->all());
+        return view('confirm');
+    }
+
+
 
     /**
      * Display a listing of the resource.
