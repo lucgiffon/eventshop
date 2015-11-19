@@ -105,6 +105,11 @@
                                 {!! Form::textarea ('EventDescr', null, ['class' => 'form-control', 'placeholder' => "Description de l'événement"]) !!}
                                 {!! $errors->first('EventDescr', '<small class="help-block">:message</small>') !!}
                             </div>
+                            <div class="form-group {!! $errors->has('EventPicture') ? 'has-error' : '' !!}">
+                                <p>Choisissez un logo pour votre événement: </p>
+                                {!!  Form::file('EventPicture', null, ['class' => 'form-control']) !!}
+                                {!! $errors->first('EventPicture', '<small class="help-block">:message</small>') !!}
+                            </div>
                         </div>
                     </div>
                 </div>
