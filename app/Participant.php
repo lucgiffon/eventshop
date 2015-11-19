@@ -75,4 +75,22 @@ class Participant extends Model
     {
         return $this->belongsTo('App\Eat');
     }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
+    public function setEventAttribute($event)
+    {
+        $this->event()->detach();
+
+        if(!$event)
+            return;
+
+        if(!$this->exists)
+            $this->save();
+
+        $this->event()->attach($event);
+    }
 }

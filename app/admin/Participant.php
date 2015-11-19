@@ -3,7 +3,7 @@
 Admin::model(App\Participant::class)->title('Participants')->alias('Participant')->display(function ()
 {
     $display = AdminDisplay::datatablesAsync();
-    $display->with('event', 'gender', 'expertise');
+    $display->with('event', 'gender', 'expertise', 'country');
 
     $display->columns([
         Column::string('lastname')->label('Nom'),
@@ -15,7 +15,7 @@ Admin::model(App\Participant::class)->title('Participants')->alias('Participant'
         Column::string('phonenumber')->label('Numéro de téléphone'),
         Column::string('address')->label('Adresse'),
         Column::string('department')->label('Département'),
-        Column::string('country')->label('Pays'),
+        Column::string('country.short_name')->label('Pays'),
     ]);
 
     return $display;
@@ -31,14 +31,15 @@ Admin::model(App\Participant::class)->title('Participants')->alias('Participant'
                 FormItem::text('email', 'Mail')->required(),
             ],
             [
-                FormItem::text('idgender', 'Sexe')->required(),
-                FormItem::text('idexpertise', 'Domaine d\'expertise')->required(),
+                FormItem::text('address', 'Adresse')->required(),
+                FormItem::text('department', 'Département')->required(),
                 FormItem::text('phonenumber', 'Numéro de téléphone')->required(),
             ],
             [
-                FormItem::text('address', 'Adresse')->required(),
-                FormItem::text('department', 'Département')->required(),
-                FormItem::text('country', 'Pays')->required(),
+                FormItem::select('gender_id', 'Genre')->model('App\Gender')->display('name')->required(),
+                FormItem::select('expertise_id', 'Domaine d\'expertise')->model('App\Expertise')->display('name')->required(),
+                FormItem::select('country_id', 'Pays')->model('App\Country')->display('short_name')->required(),
+                FormItem::multiselect('Event', 'Evénements')->model('App\Event')->display('title'),
             ],
         ]),
     ]);
