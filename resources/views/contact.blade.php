@@ -1,5 +1,25 @@
 @extends('template')
 
+@section('homescripts')
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker_end').datetimepicker({locale: 'fr'});
+            $('#datetimepicker_begin').datetimepicker({locale: 'fr'});
+        });
+    </script>
+
+@stop
+
+@section('homestyles')
+
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+@stop
+
 @section('contenu')
 
     <!-- Page Heading/Breadcrumbs -->
@@ -85,18 +105,18 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
-                                        <div class="input-group">
+                                        <div class="input-group date">
                                             <span class="input-group-addon">Date de début</span>
-                                            {!! Form::date ('EventBeginDate', null, ['class' => 'form-control', 'placeholder' => "Date de début"]) !!}
+                                            {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
                                             {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
-                                        <div class="input-group">
+                                        <div class="input-group date">
                                             <span class="input-group-addon">Date de fin</span>
-                                            {!! Form::date ('EventEndDate', null, ['class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
+                                            {!! Form::text ('EventEndDate', null, ['id' => 'datetimepicker_end', 'class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
                                             {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
