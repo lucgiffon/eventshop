@@ -15,6 +15,7 @@
 
         @foreach($eventsShowAll as $event)
             @include('cardEvent', ['col_md'=>"4", 'col_sm'=>"4",
+                'id'=>$event->id,
                 'title'=>$event->title,
                 'subTitles'=>"sous-titre",
                 'eventAddr'=>$event->address,

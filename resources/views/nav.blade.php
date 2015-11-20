@@ -10,16 +10,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="./">EventShop</a>
+                <a class="navbar-brand" href="{{ URL::to('') }}">EventShop</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="listEvent">Évènements</a>
+                        <a href="{{ URL::to('listEvent') }}">Évènements</a>
                     </li>
                     <li>
-                        <a href="contact">Contactez-nous</a>
+                        <a href="{{ URL::to('contact') }}">Contactez-nous</a>
                     </li>
                 </ul>
             </div>

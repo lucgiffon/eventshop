@@ -35,6 +35,7 @@ class Event extends Model
     protected $table = "Event";
 
     protected $fillable = [
+        'id',
         'title',
         'logo',
         'begindate',

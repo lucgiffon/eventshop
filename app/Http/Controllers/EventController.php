@@ -32,9 +32,11 @@ class EventController extends Controller
         return view('listEvent', ['eventsShowAll' => $eventsShowAll]);
     }
 
-    public function index()
+    public function index($id)
     {
-        //
+        $event = Event::whereId($id)->first();
+
+        return view('event', ['event' => $event]);
     }
 
     /**
