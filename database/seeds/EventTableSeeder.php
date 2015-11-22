@@ -83,6 +83,14 @@ class EventTableSeeder extends Seeder
                 $beginDate = $this->randDate("PAST");
                 $endDate = $this->randDate("NOW");
             }
+            if ($i % 33 == 0)
+            {
+                $selected = True;
+            }
+            else
+            {
+                $selected = False;
+            }
             $logo = $this->randLogo();
             DB::table('Event')->insert([
                 //'id' => 0,
@@ -99,7 +107,8 @@ class EventTableSeeder extends Seeder
                                                         Duis aute irure dolor in reprehenderit in voluptate velit
                                                         esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
                                                         occaecat cupidatat non proident, sunt in culpa qui officia
-                                                        deserunt mollit anim id est laborum."
+                                                        deserunt mollit anim id est laborum.",
+                'selected' => $selected
             ]);
         }
     }
