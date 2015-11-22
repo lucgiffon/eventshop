@@ -22,6 +22,10 @@ class CreateCountryTable extends Migration
             $table->text('un_member')->nullable();
             $table->string('calling_code')->nullable();
             $table->string('cctld')->nullable();
+            $table->timestamp('created_at')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')
+                ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
     }
