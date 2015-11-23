@@ -23,6 +23,7 @@ class CreateEventTable extends Migration
             $table->string('mailcontact');
             $table->text('description');
             $table->boolean('selected');
+            $table->boolean('isactive')->default(false);
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
@@ -30,7 +31,7 @@ class CreateEventTable extends Migration
         });
     }
 
-    
+
     /**
      * Reverse the migrations.
      *

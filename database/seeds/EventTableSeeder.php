@@ -91,6 +91,15 @@ class EventTableSeeder extends Seeder
             {
                 $selected = False;
             }
+            if (i % 2 == 0)
+            {
+				isActive = True;
+			}
+			else
+			{
+				isActive = False;
+			}
+
             $logo = $this->randLogo();
             DB::table('Event')->insert([
                 //'id' => 0,
@@ -108,7 +117,8 @@ class EventTableSeeder extends Seeder
                                                         esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
                                                         occaecat cupidatat non proident, sunt in culpa qui officia
                                                         deserunt mollit anim id est laborum.",
-                'selected' => $selected
+                'selected' => $selected,
+                'isactive' => $isActive
             ]);
         }
     }
