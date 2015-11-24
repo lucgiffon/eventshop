@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventPicture extends Model
 {
-    protected $table = "EventPicture";
+    protected $table = "eventpicture";
 
     protected $fillable = [
         'picture',

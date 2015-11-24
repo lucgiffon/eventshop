@@ -7,8 +7,26 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#datetimepicker_end').datetimepicker({locale: 'fr'});
             $('#datetimepicker_begin').datetimepicker({locale: 'fr'});
+            $('#datetimepicker_end').datetimepicker({locale: 'fr'});
+
+            $("#datetimepicker_begin").on("dp.change", function(e) {
+                $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#postFormContact-btn').click(function(){
+                $.ajax({
+                    url: 'login',
+                    type: "post",
+                    data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });
         });
     </script>
 
@@ -16,7 +34,7 @@
 
 @section('homestyles')
 
-    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
 @stop
 
@@ -67,7 +85,7 @@
                     </div>
                    {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
                         <div class="panel-body">
-                            {!! Form::open(['url' => 'confirm']) !!}
+                            {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact']) !!}
                             {{ csrf_field() }}
                             <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
@@ -134,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary', 'id' => 'postFormContact-btn']) !!}
                 {!! Form::close() !!}
             </div>
         </div>

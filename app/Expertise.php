@@ -15,9 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Expertise extends Model
 {
-    protected $table = "Expertise";
+    protected $table = "expertise";
 
     protected $fillable = [
+        'id',
         'name'
     ];
 

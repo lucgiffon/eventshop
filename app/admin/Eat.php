@@ -10,6 +10,8 @@ Admin::model(App\Eat::class)->title('Repas')->alias('Eat')->display(function ()
         Column::datetime('date')->label('Date')->format('d/m/Y'),
         Column::string('Event.title')->label('Evénement')->append(Column::filter('event_id'))->orderable(false),
         Column::string('Participant.firstname')->label('Participant')->append(Column::filter('participant_id'))->orderable(false),
+        Column::datetime('created_at')->label('Date création')->format('d/m/Y'),
+        Column::datetime('updated_at')->label('Date dernière modification')->format('d/m/Y'),
     ]);
 
     return $display;

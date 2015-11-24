@@ -14,6 +14,6 @@ return [
     */
 
     'failed' => 'Ces informations de connexion sont invalides.',
-    'throttle' => 'Trop de tentative de connexion. Merci de réessayer dans :seconds secondes.',
+    'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
 
 ];
