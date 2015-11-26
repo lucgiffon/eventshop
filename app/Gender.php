@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Gender extends Model
 {
-    protected $table = "gender";
+    protected $table = "Gender";
 
     protected $fillable = [
         'id',

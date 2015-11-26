@@ -91,13 +91,13 @@ class EventTableSeeder extends Seeder
             {
                 $selected = False;
             }
-            if (i % 2 == 0)
+            if ($i % 2 == 0)
             {
-				isActive = True;
+				$isActive = True;
 			}
 			else
 			{
-				isActive = False;
+				$isActive = False;
 			}
 
             $logo = $this->randLogo();

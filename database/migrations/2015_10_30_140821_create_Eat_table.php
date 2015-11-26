@@ -13,15 +13,17 @@ class CreateEatTable extends Migration
     public function up()
     {
         Schema::create('Eat', function(Blueprint $table) {
+            $table->increments('id');
             $table->integer('participant_id')->unsigned();
             $table->date('date');
             $table->integer('event_id')->unsigned();
-            $table->primary(['participant_id', 'date']);
+            $table->unique(['participant_id', 'date']);
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
+
         Schema::table('Eat', function(Blueprint $table) {
         $table->foreign('event_id')->references('id')->on('Event')
                                 ->onDelete('cascade')
