@@ -7,3 +7,4 @@ Admin::menu(App\EventPicture::class)->icon('fa-picture-o');
 Admin::menu(App\Expertise::class)->icon('fa-graduation-cap');
 Admin::menu(App\Gender::class)->icon('fa-intersex');
 Admin::menu(App\Eat::class)->icon('fa-cutlery');
+Admin::menu(App\PivotEventParticipant::class)->icon('fa-file-pdf-o');

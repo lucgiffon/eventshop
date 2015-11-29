@@ -37,6 +37,8 @@ class Action extends NamedColumn
 	 */
 	protected $url;
 
+    protected $isgenerated;
+
 	/**
 	 * @param string $name
 	 */
@@ -44,21 +46,6 @@ class Action extends NamedColumn
 	{
 		parent::__construct($name);
 		$this->orderable(false);
-	}
-
-	/**
-	 * Get or set icon class
-	 * @param string|null $icon
-	 * @return $this|string
-	 */
-	public function icon($icon = null)
-	{
-		if (is_null($icon))
-		{
-			return $this->icon;
-		}
-		$this->icon = $icon;
-		return $this;
 	}
 
 	/**
@@ -128,13 +115,29 @@ class Action extends NamedColumn
 	public function render()
 	{
 		$params = [
-			'icon'   => $this->icon(),
 			'style'  => $this->style(),
 			'value'  => $this->value(),
 			'target' => $this->target(),
 			'url'    => $this->url(),
+			'icon'   => $this->icon(),
+            'isgenerated' => $this->isgenerated
 		];
 		return view(AdminTemplate::view('column.action'), $params);
+	}
+
+	/**
+	 * Get or set icon class
+	 * @param string|null $icon
+	 * @return $this|string
+	 */
+	public function icon($icon = null)
+	{
+		if (is_null($icon))
+		{
+			return $this->icon;
+		}
+		$this->icon = $icon;
+		return $this;
 	}
 
 	/**
@@ -154,10 +157,14 @@ class Action extends NamedColumn
 				}
 				if ( ! is_null($this->instance))
 				{
+                    $this->isgenerated = $this->instance->getKey();
+
 					return strtr($this->url, [':id' => $this->instance->getKey()]);
 				}
 				return $this->url;
 			}
+            $this->isgenerated = $this->instance->getKey();
+
 			return $this->model()->displayUrl([
 				'_action' => $this->name(),
 				'_id'     => $this->instance->getKey(),
@@ -176,5 +183,4 @@ class Action extends NamedColumn
 		$callback = $this->callback();
 		call_user_func($callback, $instance);
 	}
-
 }

@@ -50,6 +50,13 @@ class AdminController extends Controller
         return Admin::view($content, 'Accueil');
     }
 
+    public function downloadAttestation($fileId)
+    {
+        $pathToFile = storage_path() . "/exports/attestation_" . $fileId . ".pdf";
+
+        return response()->download($pathToFile);
+    }
+
     public function getSecond()
     {
         $method = str_replace('::', '@', __METHOD__);

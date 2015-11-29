@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Eat;
@@ -47,6 +48,11 @@ class EventController extends Controller
         $countries = Country::lists('short_name', 'id');
 
         return view('event', ['event' => $event, 'genders' => $genders, 'expertises' => $expertises, 'countries' => $countries,]);
+    }
+
+    public function getEventWithId($id)
+    {
+        return Event::find($id);
     }
 
     public function postForm(Request $request)

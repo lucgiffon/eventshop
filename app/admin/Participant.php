@@ -4,8 +4,8 @@ Admin::model(App\Participant::class)->title('Participants')->alias('Participant'
 {
     $display = AdminDisplay::datatablesAsync();
     $display->with('event', 'gender', 'expertise', 'country');
-
     $display->columns([
+        Column::checkbox(),
         Column::string('lastname')->label('Nom'),
         Column::string('firstname')->label('Prénom'),
         Column::lists('event.title')->label('Evénements'),
@@ -15,7 +15,7 @@ Admin::model(App\Participant::class)->title('Participants')->alias('Participant'
         Column::string('phonenumber')->label('Numéro de téléphone'),
         Column::string('address')->label('Adresse'),
         Column::string('department')->label('Département'),
-        Column::string('country.short_name')->label('Pays'),
+        Column::string('country.short_name')->label('Pays')
     ]);
 
     return $display;

@@ -17,3 +17,7 @@ Route::get('contact', 'ContactController@home');
 Route::get('event/{id}', 'EventController@index');
 Route::post('postFormContact', 'ContactController@postForm');
 Route::post('postFormEvent', 'EventController@postForm');
+
+Route::get('downloadAttestation/{fileId}',
+    'AdminController@downloadAttestation'
+);

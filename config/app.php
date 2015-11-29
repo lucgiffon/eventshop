@@ -154,6 +154,12 @@ return [
         SleepingOwl\AdminLteTemplate\AdminLteTemplateServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+
+        /*
+         * Others
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*
@@ -218,6 +224,11 @@ return [
         'AdminForm'     => SleepingOwl\Admin\Form\AdminForm::class,
         'AdminTemplate' => SleepingOwl\Admin\Templates\Facade\AdminTemplate::class,
         'FormItem'      => SleepingOwl\Admin\FormItems\FormItem::class,
+
+        /*
+         * Others
+         */
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
