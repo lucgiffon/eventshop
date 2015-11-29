@@ -85,10 +85,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
+                                        Date de début
                                         <div class="input-group">
-                                            <span class="input-group-addon">Date de début</span>
-                                            {!! Form::date ('EventBeginDate', null, ['class' => 'form-control', 'placeholder' => "Date de début"]) !!}
-                                            {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+                                                {!! Form::text ('EventBeginDate', null, ['id' =>'event_begin_date' ,'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
+                                                {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +99,7 @@
                                     <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
                                         <div class="input-group">
                                             <span class="input-group-addon">Date de fin</span>
-                                            {!! Form::date ('EventEndDate', null, ['class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
+                                            {!! Form::date ('EventEndDate', null, ['id' =>'event_end_date','class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
                                             {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
@@ -119,4 +122,5 @@
             </div>
         </div>
     </div>
+
 @stop
