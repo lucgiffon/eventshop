@@ -8,7 +8,33 @@ Admin::model(App\PivotEventParticipant::class)->title('Attestations')->alias('at
     $display->actions([
         Column::action('export_all_pdf')->value(' Générer les attestations sélectionnés')->icon('fa-file-pdf-o')->target('_blank')->callback(function ($collection)
         {
-            dd('You are trying to export:', $collection->toArray());
+            foreach($collection as $instance)
+            {
+                $event = App\Event::find($instance->event_id);
+                $participant = App\Participant::find($instance->participant_id);
+
+                Excel::create('attestation_' . $instance->id, function($excel) use($event, $participant) {
+                    $excel->sheet($event->title, function($sheet) use($event, $participant) {
+                        $sheet->loadView('admin.attestation', ['participant' => $participant, 'event' => $event]);
+                        $sheet->getDefaultStyle()->applyFromArray(array(
+                            'border' => array(
+                                'top'  => array(
+                                    'style' => 'none'
+                                ),
+                                'bottom'  => array(
+                                    'style' => 'none'
+                                ),
+                                'left'  => array(
+                                    'style' => 'none'
+                                ),
+                                'right'  => array(
+                                    'style' => 'none'
+                                )
+                            )
+                        ));
+                    });
+                })->store('pdf', false, true);
+            }
         })
     ]);
 
@@ -51,8 +77,8 @@ Admin::model(App\PivotEventParticipant::class)->title('Attestations')->alias('at
     $display->columns([
         Column::checkbox(),
         Column::string('event.title')->label('Evénement'),
-        Column::string('participant.firstname')->label('Participant'),
-        Column::string('participant.firstname')->label('Participant'),
+        Column::string('participant.firstname')->label('Participant prénom'),
+        Column::string('participant.lastname')->label('Participant nom'),
         $columnExport,
         $columnDownload,
         Column::datetime('created_at')->label('Date création')->format('d/m/Y'),
