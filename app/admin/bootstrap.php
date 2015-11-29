@@ -1,5 +1,7 @@
 <?php
 
+namespace SleepingOwl\Admin\Columns;
+
 /*
  * Describe you custom displays, columns and form items here.
  *
@@ -11,3 +13,4 @@
  *
  */
 
+Column::register('export', Column\Export::class);

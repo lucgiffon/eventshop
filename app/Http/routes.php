@@ -14,4 +14,10 @@
 Route::get('/', 'EventController@home');
 Route::get('listEvent', 'EventController@listEvent');
 Route::get('contact', 'ContactController@home');
-Route::get('confirm', 'ContactController@postForm');
+Route::get('event/{id}', 'EventController@index');
+Route::post('postFormContact', 'ContactController@postForm');
+Route::post('postFormEvent', 'EventController@postForm');
+
+Route::get('downloadAttestation/{fileId}',
+    'AdminController@downloadAttestation'
+);

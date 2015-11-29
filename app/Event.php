@@ -32,9 +32,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Event extends Model
 {
-    protected $table = "Event";
+    protected $table = 'Event';
 
     protected $fillable = [
+        'id',
         'title',
         'logo',
         'begindate',
@@ -42,7 +43,8 @@ class Event extends Model
         'address',
         'mailcontact',
         'description',
-        'selected'
+        'selected',
+        'isActive'
     ];
 
     public $timestamps = true;
@@ -64,7 +66,7 @@ class Event extends Model
 
     public function eat()
     {
-        return $this->belongsTo('App\Eat');
+        return $this->hasMany('App\Eat');
     }
 
     public function getImageFields()

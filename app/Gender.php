@@ -18,6 +18,7 @@ class Gender extends Model
     protected $table = "Gender";
 
     protected $fillable = [
+        'id',
         'name'
     ];
 

@@ -1,6 +1,6 @@
  <!-- Header Carousel -->
 </div>
-    <header id="myCarousel" class="carousel slide">
+    <header id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             @foreach($eventsArray_OurSelection as $k => $event)

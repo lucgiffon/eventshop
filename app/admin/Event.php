@@ -34,8 +34,8 @@ Admin::model(App\Event::class)->title('Evénements')->alias('Event')->display(fu
                 FormItem::text('mailcontact', 'Mail')->required(),
                 FormItem::text('address', 'Address'),
                 FormItem::checkbox('selected', 'Sélectionné'),
-                FormItem::date('begindate', 'Date de début')->format('d/m/Y'),
-                FormItem::date('enddate', 'Date de fin')->format('d/m/Y'),
+                FormItem::timestamp('begindate', 'Date de début')->format('d/m/Y H:i'),
+                FormItem::timestamp('enddate', 'Date de fin')->format('d/m/Y H:i'),
             ],
             [
                 FormItem::image('logo', 'Logo'),

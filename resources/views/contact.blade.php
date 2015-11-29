@@ -1,5 +1,43 @@
 @extends('template')
 
+@section('homescripts')
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker_begin').datetimepicker({locale: 'fr'});
+            $('#datetimepicker_end').datetimepicker({locale: 'fr'});
+
+            $("#datetimepicker_begin").on("dp.change", function(e) {
+                $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#postFormContact-btn').click(function(){
+                $.ajax({
+                    url: 'login',
+                    type: "post",
+                    data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+@stop
+
+@section('homestyles')
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+@stop
+
 @section('contenu')
 
     <!-- Page Heading/Breadcrumbs -->
@@ -47,7 +85,7 @@
                     </div>
                    {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
                         <div class="panel-body">
-                            {!! Form::open(['url' => 'confirm']) !!}
+                            {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact']) !!}
                             {{ csrf_field() }}
                             <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
@@ -85,21 +123,19 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
-                                        Date de début
-                                        <div class="input-group">
-                                                {!! Form::text ('EventBeginDate', null, ['id' =>'event_begin_date' ,'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
-                                                {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+                                        <div class="input-group date">
+                                            <span class="input-group-addon">Date de début</span>
+                                            {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
+                                            {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
-                                        <div class="input-group">
+                                        <div class="input-group date">
                                             <span class="input-group-addon">Date de fin</span>
-                                            {!! Form::date ('EventEndDate', null, ['id' =>'event_end_date','class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
+                                            {!! Form::text ('EventEndDate', null, ['id' => 'datetimepicker_end', 'class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
                                             {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
                                         </div>
                                     </div>
@@ -117,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary', 'id' => 'postFormContact-btn']) !!}
                 {!! Form::close() !!}
             </div>
         </div>

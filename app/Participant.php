@@ -72,7 +72,7 @@ class Participant extends Model
 
     public function eat()
     {
-        return $this->belongsTo('App\Eat');
+        return $this->hasMany('App\Eat');
     }
 
     public function country()

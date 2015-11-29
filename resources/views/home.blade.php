@@ -2,13 +2,6 @@
 
 @section('homescripts')
 
-    <!-- Script to Activate the Carousel -->
-    <script>
-        $('#myCarousel').carousel({
-            interval: 5000 //changes the speed
-        })
-    </script>
-
 @stop
 
 @section('contenu')
@@ -32,6 +25,7 @@
         </div>
         @foreach($eventsArray_MostPopular as $event)
             @include('cardEvent', ['col_md'=>"4", 'col_sm'=>"4",
+                'id'=>$event->id,
                 'title'=>$event->title,
                 'subTitles'=>"sous-titre",
                 'eventAddr'=>$event->address,
@@ -56,6 +50,7 @@
         </div>
         @foreach($eventsArray_Newest as $event)
             @include('cardEvent', ['col_md'=>"3", 'col_sm'=>"6",
+                'id'=>$event->id,
                 'title'=>$event->title,
                 'subTitles'=>"sous-titre",
                 'eventAddr'=>$event->address,

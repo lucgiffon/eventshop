@@ -18,6 +18,7 @@ class Expertise extends Model
     protected $table = "Expertise";
 
     protected $fillable = [
+        'id',
         'name'
     ];
 

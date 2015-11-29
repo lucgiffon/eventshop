@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ParticipantTableSeeder::class);
         $this->call(Event_ParticipantTableSeeder::class);
         $this->call(EatTableSeeder::class);
-        $this->call(EventSelectedTableSeeder::class);
         $this->call(MessageTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
         Model::reguard();
     }
 }

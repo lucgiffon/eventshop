@@ -9,20 +9,18 @@ use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
-
-
     public function home() {
         return view('contact');
     }
 
-
-    public function postForm(ContactRequest $request)
+    public function postForm()
     {
-        Mail::send('emails.contact', $request->all());
-        return view('confirm');
+        if(Request::ajax()) {
+            $data = Input::all();
+            print_r($data);
+            die;
+        }
     }
-
-
 
     /**
      * Display a listing of the resource.

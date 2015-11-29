@@ -155,3 +155,7 @@ select.form-control + .chosen-container-multi .chosen-results li.result-selected
 	cursor: default;
 	background-color: white;
 }
+
+.btnActionTop {
+	padding: 10px 20px;
+}
