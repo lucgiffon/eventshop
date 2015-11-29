@@ -3,15 +3,15 @@
 Admin::model(App\Participant::class)->title('Participants')->alias('Participant')->display(function ()
 {
     $display = AdminDisplay::datatablesAsync();
-    $display->with('event', 'gender', 'expertise', 'country');
+    $display->with('Event', 'Gender', 'Expertise', 'Country');
     $display->columns([
         Column::checkbox(),
         Column::string('lastname')->label('Nom'),
         Column::string('firstname')->label('Prénom'),
         Column::lists('event.title')->label('Evénements'),
         Column::string('email')->label('Mail'),
-        Column::string('gender.name')->label('Genre'),
-        Column::string('expertise.name')->label('Domaine d\'expertise'),
+        Column::string('Gender.name')->label('Genre'),
+        Column::string('Expertise.name')->label('Domaine d\'expertise'),
         Column::string('phonenumber')->label('Numéro de téléphone'),
         Column::string('address')->label('Adresse'),
         Column::string('department')->label('Département'),

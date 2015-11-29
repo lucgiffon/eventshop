@@ -13,9 +13,11 @@ class CreateEventParticipantTable extends Migration
     public function up()
     {
         Schema::create('event_participant', function(Blueprint $table) {
+            $table->increments('id');
             $table->integer('participant_id')->unsigned();
             $table->integer('event_id')->unsigned();
-            $table->primary(['participant_id', 'event_id']);
+            $table->unique(['participant_id', 'event_id']);
+//            $table->primary(['participant_id', 'event_id']);
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
