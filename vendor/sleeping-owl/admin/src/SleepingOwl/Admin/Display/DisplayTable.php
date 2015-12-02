@@ -195,10 +195,13 @@ class DisplayTable implements Renderable, DisplayInterface
 		{
 			foreach ($this->actions as $action)
 			{
-				$action->url($this->model()->displayUrl([
-					'_action' => $action->name(),
-					'_ids'    => '',
-				]));
+				if($action->name() == "download_all_pdf")
+					$action->url('../downloadAttestationZip/0,');
+				else
+					$action->url($this->model()->displayUrl([
+						'_action' => $action->name(),
+						'_ids'    => '',
+					]));
 			}
 			return $this->actions;
 		}

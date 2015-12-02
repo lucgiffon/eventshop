@@ -11,7 +11,8 @@
         "sleeping-owl/admin-lte-template": "dev-master",
         "laravelcollective/html": "5.1.*",
         "maatwebsite/excel": "~2.0",
-        "tecnickcom/tcpdf": "~6.0.0"
+        "tecnickcom/tcpdf": "~6.0.0",
+        "chumper/zipper": "0.6.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

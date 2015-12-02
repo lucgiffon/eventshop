@@ -21,7 +21,6 @@ if(isset($isgenerated))
 		else if($icon == 'fa-download')
 		{
 			$disabled = '';
-			$url = '';
 		}
 	}
 

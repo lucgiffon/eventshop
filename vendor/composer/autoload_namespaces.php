@@ -26,4 +26,5 @@ return array(
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
+    'Chumper\\Zipper' => array($vendorDir . '/chumper/zipper/src'),
 );

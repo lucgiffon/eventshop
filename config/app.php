@@ -159,7 +159,8 @@ return [
         /*
          * Others
          */
-        Maatwebsite\Excel\ExcelServiceProvider::class
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class
     ],
 
     /*
@@ -229,6 +230,7 @@ return [
          * Others
          */
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Zipper' => Chumper\Zipper\Zipper::class
     ],
 
 ];
