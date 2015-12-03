@@ -4,38 +4,47 @@ Admin::model(App\PivotEventParticipant::class)->title('Attestations')->alias('at
 {
     $display = AdminDisplay::datatablesAsync();
     $display->with('event');
-
+    $display->filters([
+        Filter::related('event_id')->model('App\Event'),
+        Filter::related('participant_id')->model('App\Participant'),
+    ]);
     $display->actions([
         Column::action('export_all_pdf')->value(' Générer les attestations sélectionnés')->icon('fa-file-pdf-o')->target('_blank')->callback(function ($collection)
         {
             foreach($collection as $instance)
             {
-                $event = App\Event::find($instance->event_id);
-                $participant = App\Participant::find($instance->participant_id);
+                if(!file_exists(base_path('/storage/exports/attestation_' . $instance->id . '.pdf')))
+                {
+                    $event = App\Event::find($instance->event_id);
+                    $participant = App\Participant::find($instance->participant_id);
 
-                Excel::create('attestation_' . $instance->id, function($excel) use($event, $participant) {
-                    $excel->sheet($event->title, function($sheet) use($event, $participant) {
-                        $sheet->loadView('admin.attestation', ['participant' => $participant, 'event' => $event]);
-                        $sheet->getDefaultStyle()->applyFromArray(array(
-                            'border' => array(
-                                'top'  => array(
-                                    'style' => 'none'
-                                ),
-                                'bottom'  => array(
-                                    'style' => 'none'
-                                ),
-                                'left'  => array(
-                                    'style' => 'none'
-                                ),
-                                'right'  => array(
-                                    'style' => 'none'
+                    Excel::create('attestation_' . $instance->id, function($excel) use($event, $participant) {
+                        $excel->sheet($event->title, function($sheet) use($event, $participant) {
+                            $sheet->loadView('admin.attestation', ['participant' => $participant, 'event' => $event]);
+                            $sheet->getDefaultStyle()->applyFromArray(array(
+                                'border' => array(
+                                    'top'  => array(
+                                        'style' => 'none'
+                                    ),
+                                    'bottom'  => array(
+                                        'style' => 'none'
+                                    ),
+                                    'left'  => array(
+                                        'style' => 'none'
+                                    ),
+                                    'right'  => array(
+                                        'style' => 'none'
+                                    )
                                 )
-                            )
-                        ));
-                    });
-                })->store('pdf', false, true);
+                            ));
+                        });
+                    })->store('pdf', false, true);
+                }
             }
-        })
+
+            echo "<script>window.close();</script>";
+        }),
+        Column::action('download_all_pdf')->value(' Télécharger les attestations sélectionnés')->icon('fa-download ')->target('_blank')
     ]);
 
     $columnExport = Column::action('export_pdf')->value('Générer attestation')->label('Générer')->icon('fa-file-pdf-o')->target('_blank')->callback(function ($instance)
@@ -76,9 +85,8 @@ Admin::model(App\PivotEventParticipant::class)->title('Attestations')->alias('at
 
     $display->columns([
         Column::checkbox(),
-        Column::string('event.title')->label('Evénement'),
-        Column::string('participant.firstname')->label('Participant prénom'),
-        Column::string('participant.lastname')->label('Participant nom'),
+        Column::string('event.title')->label('Evénement')->append(Column::filter('event_id')),
+        Column::string('participant.fullname')->label('Participant')->append(Column::filter('participant_id')),
         $columnExport,
         $columnDownload,
         Column::datetime('created_at')->label('Date création')->format('d/m/Y'),

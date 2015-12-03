@@ -21,3 +21,7 @@ Route::post('postFormEvent', 'EventController@postForm');
 Route::get('downloadAttestation/{fileId}',
     'AdminController@downloadAttestation'
 );
+
+Route::get('downloadAttestationZip/{ids}',
+    'AdminController@downloadAttestationZip'
+);

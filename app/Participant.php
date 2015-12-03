@@ -80,6 +80,12 @@ class Participant extends Model
         return $this->belongsTo('App\Country');
     }
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
+
+    }
+
     public function setEventAttribute($event)
     {
         $this->event()->detach();

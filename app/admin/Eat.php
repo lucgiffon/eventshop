@@ -5,7 +5,10 @@ Admin::model(App\Eat::class)->title('Repas')->alias('Eat')->display(function ()
     $display = AdminDisplay::datatablesAsync();
     $display->with('Participant', 'Event');
     $display->order([[0, 'ASC']]);
-
+    $display->filters([
+        Filter::related('event_id')->model('App\Event')->display('événement'),
+        Filter::related('participant_id')->model('App\Participant')->display('participant'),
+    ]);
     $display->columns([
         Column::datetime('date')->label('Date')->format('d/m/Y'),
         Column::string('Event.title')->label('Evénement')->append(Column::filter('event_id'))->orderable(false),

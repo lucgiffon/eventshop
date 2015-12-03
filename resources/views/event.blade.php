@@ -1,4 +1,3 @@
-
 @extends('template')
 
 @section('homescripts')
@@ -16,7 +15,7 @@
                 multidate: true,
                 format: 'dd/mm/yyyy',
                 multidateSeparator: ", ",
-                startDate: "@if(date ('d/m/Y', strtotime('tomorrow UTC')) > date('d/m/Y', strtotime($event->enddate))) {{ date('d/m/Y', strtotime($event->enddate . "+1 days")) }} @elseif((date ('d/m/Y', strtotime('tomorrow UTC')) > date('d/m/Y', strtotime($event->begindate)))){{ date('d/m/Y', strtotime('tomorrow UTC')) }}@else{{ date('d/m/Y', strtotime($event->begindate)) }}@endif",
+                startDate: "@if(date ('Y-m-d', strtotime('tomorrow UTC')) > date('Y-m-d', strtotime($event->enddate))) {{ date('d/m/Y', strtotime($event->enddate . "+1 days")) }} @elseif((date ('Y-m-d', strtotime('tomorrow UTC')) > date('Y-m-d', strtotime($event->begindate)))){{ date('d/m/Y', strtotime('tomorrow UTC')) }}@else{{ date('d/m/Y', strtotime($event->begindate)) }}@endif",
                 endDate: "{{ date('d/m/Y', strtotime($event->enddate)) }}"
         });
     </script>
@@ -116,7 +115,7 @@
         <div class="col-lg-8">
 
             <!-- Date/Time -->
-            <p><i class="fa fa-clock-o"></i> Créé le {{ $event->created_at }}</p>
+            <p><i class="fa fa-clock-o"></i> Créé le {{ date('d/m/Y', strtotime($event->created_at)) }}, dernière modification le {{ date('d/m/Y', strtotime($event->updated_at)) }}</p>
 
             <hr>
 
@@ -195,7 +194,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            @if(date ('d/m/Y', strtotime('tomorrow UTC')) > date('d/m/Y', strtotime($event->enddate)))
+            @if(date('Y-m-d', strtotime('tomorrow UTC')) > date('Y-m-d', strtotime($event->enddate)))
 
                 <div class="alert alert-warning text-center" role="alert">L'événement est terminé.</div>
 
