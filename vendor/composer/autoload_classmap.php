@@ -75,7 +75,7 @@ return array(
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
     'CountryTableSeeder' => $baseDir . '/database/seeds/CountryTableSeeder.php',
     'CreateAdministratorsTable' => $baseDir . '/database/migrations/2014_10_12_104748_create_administrators_table.php',
-    'CreateCountryTable' => $baseDir . '/database/migrations/2015_11_22_170115_create_Country_table.php',
+    'CreateCountryTable' => $baseDir . '/database/migrations/2014_11_22_170115_create_Country_table.php',
     'CreateEatTable' => $baseDir . '/database/migrations/2015_10_30_140821_create_Eat_table.php',
     'CreateEventParticipantTable' => $baseDir . '/database/migrations/2015_10_30_140653_create_event_participant_table.php',
     'CreateEventPictureTable' => $baseDir . '/database/migrations/2015_10_30_140705_create_EventPicture_table.php',

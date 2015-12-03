@@ -22,7 +22,7 @@ class CreateParticipantTable extends Migration
             $table->string('phonenumber');
             $table->string('address');
             $table->string('department');
-            $table->string('country');
+            $table->integer('country_id')->unsigned();
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
@@ -34,6 +34,9 @@ class CreateParticipantTable extends Migration
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade');
         $table->foreign('expertise_id')->references('id')->on('Expertise')
+                                ->onDelete('cascade')
+                                ->onUpdate('cascade');
+        $table->foreign('country_id')->references('id')->on('Country')
                                 ->onDelete('cascade')
                                 ->onUpdate('cascade');
         });
@@ -49,6 +52,7 @@ class CreateParticipantTable extends Migration
         Schema::table('Participant', function(Blueprint $table) {
                 $table->dropForeign('Participant_gender_id_foreign');
                 $table->dropForeign('Participant_expertise_id_foreign');
+                $table->dropForeign('Participant_country_id_foreign');
         });        
         Schema::drop('Participant');
     }

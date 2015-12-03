@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
+        $this->call(CountryTableSeeder::class);
         $this->call(GenderTableSeeder::class);
         $this->call(ExpertiseTableSeeder::class);
         $this->call(EventTableSeeder::class);
@@ -24,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Event_ParticipantTableSeeder::class);
         $this->call(EatTableSeeder::class);
         $this->call(MessageTableSeeder::class);
-        $this->call(CountryTableSeeder::class);
         Model::reguard();
     }
 }

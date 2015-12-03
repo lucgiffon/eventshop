@@ -41,7 +41,7 @@ class ParticipantTableSeeder extends Seeder
                 'phonenumber' => $phoneNumber,
                 'address' => $i . "avenue du participant - 13009 Luminy",
                 'department' => "departement" . $i,
-                'country' => "pays" . $i
+                'country_id' => rand(1, 250)
 
             ]);
 
