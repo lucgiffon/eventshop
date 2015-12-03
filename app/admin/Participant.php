@@ -4,6 +4,57 @@ Admin::model(App\Participant::class)->title('Participants')->alias('Participant'
 {
     $display = AdminDisplay::datatablesAsync();
     $display->with('Event', 'Gender', 'Expertise', 'Country');
+    $display->actions([
+        Column::action('download_all_xls')->value(' Télécharger les fiches des participants sélectionnés')->icon('fa-download ')->target('_blank')->callback(function ($collection)
+        {
+            $data = [];
+
+            foreach($collection as $instance)
+            {
+                $instanceArray = $instance->toArray();
+                $instanceArray['event'] = '';
+
+                foreach($instance->event as $k => $event)
+                {
+                    if($k == 0)
+                        $instanceArray['event'] = $event->title;
+                    else
+                        $instanceArray['event'] = $instanceArray['event'] . PHP_EOL . $event->title;
+                }
+
+                $gender = App\Gender::find($instanceArray['gender_id']);
+                $expertise = App\Expertise::find($instanceArray['expertise_id']);
+                $country = App\Country::find($instanceArray['country_id']);
+
+                unset($instanceArray['gender_id']);
+                $instanceArray['gender'] = $gender->name;
+
+                unset($instanceArray['expertise_id']);
+                $instanceArray['expertise'] = $expertise->name;
+
+                unset($instanceArray['country_id']);
+                $instanceArray['country'] = $country->short_name;
+
+                $data[] = $instanceArray;
+            }
+
+            Excel::create('participants', function($excel) use($data) {
+
+                $excel->sheet('participants', function($sheet) use($data) {
+
+                    $numberRow = count($data) + 1;
+
+                    $sheet->fromArray($data, null, 'A1', true, false);
+                    $sheet->prependRow(['id', 'Mail', 'Nom', 'Prénom', 'Téléphone', 'Adresse', 'Département', 'Date de création', 'Date dernière modification', 'Evénement(s)', 'Genre', 'Domaine d\'expertise', 'Pays']);
+                    $sheet->getStyle('J2:J' . $numberRow)->getAlignment()->setWrapText(true);
+
+                });
+
+            })->export('xls');
+
+            echo "<script>window.close();</script>";
+        })
+    ]);
     $display->columns([
         Column::checkbox(),
         Column::string('lastname')->label('Nom'),
