@@ -57,6 +57,21 @@ class EventController extends Controller
 
     public function postForm(Request $request)
     {
+
+        $filters = array(
+            'lastname'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'firstname'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'phone'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'adress'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'department'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'mail'  => FILTER_SANITIZE_EMAIL,
+            'texte' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'gender' => FILTER_SANITIZE_NUMBER_INT,
+            'expertise' => FILTER_SANITIZE_NUMBER_INT,
+            'country' => FILTER_SANITIZE_NUMBER_INT,
+            'dates' => FILTER_UNSAFE_RAW // sanitization of the date field is done later
+        );
+
         if ($request->isMethod('post')) {
             /* Validation des données */
 
@@ -83,9 +98,9 @@ class EventController extends Controller
                 $begin_date = date('Y-m-d', strtotime($event->begindate));
 
             $rules = [
-                'gender' => 'required|exists:gender,id',
-                'expertise' => 'required|exists:expertise,id',
-                'country' => 'required|exists:country,id',
+                'gender' => 'required|exists:Gender,id',
+                'expertise' => 'required|exists:Expertise,id',
+                'country' => 'required|exists:Country,id',
 
                 'lastname' => 'required|max:255',
                 'firstname' => 'required|max:255',
@@ -111,6 +126,10 @@ class EventController extends Controller
                 ), 422); // 422 being the HTTP code for an Unprocessable Entity.
             }
 
+
+
+            $sanitizedInput = filter_var_array($request->input(), $filters);
+
             /* Ajout des données */
             $participant = new Participant([
                 'email' => $request->input('mail'),
@@ -134,7 +153,9 @@ class EventController extends Controller
             if(isset($dates))
                 foreach($dates as $key => $val)
                 {
-                    $eat = new Eat(['date' => date('Y-m-d', strtotime(str_replace('/', '-', $val)))]);
+                    // sanitizing the date field
+                    $date = preg_replace("([^0-9/])", "", $val);
+                    $eat = new Eat(['date' => date('Y-m-d', strtotime(str_replace('/', '-', $date)))]);
                     $eat->participant()->associate($participant);
                     $eat->event()->associate($event);
                     $eat->save();

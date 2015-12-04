@@ -1,29 +1,92 @@
 @extends('template')
 
+{{--@section('homescripts')--}}
+
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
+
+    {{--<script type="text/javascript">--}}
+        {{--$(function () {--}}
+            {{--$('#datetimepicker_begin').datetimepicker({locale: 'fr'});--}}
+            {{--$('#datetimepicker_end').datetimepicker({locale: 'fr'});--}}
+
+            {{--$("#datetimepicker_begin").on("dp.change", function(e) {--}}
+                {{--$('#datetimepicker_end').data("DateTimePicker").minDate(e.date);--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
+    {{--<script type="text/javascript">--}}
+        {{--$(document).ready(function(){--}}
+            {{--$('#postFormContact-btn').click(function(){--}}
+                {{--$.ajax({--}}
+                    {{--url: 'login',--}}
+                    {{--type: "post",--}}
+                    {{--data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},--}}
+                    {{--success: function(data){--}}
+                        {{--alert(data);--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
+
+{{--@stop--}}
+
 @section('homescripts')
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>--}}
+    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/locales/bootstrap-datepicker.fr.min.js"></script>--}}
+    {{--<script src="{{ URL::asset('js/jquery.gritter.min.js') }}"></script>--}}
 
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker_begin').datetimepicker({locale: 'fr'});
-            $('#datetimepicker_end').datetimepicker({locale: 'fr'});
-
-            $("#datetimepicker_begin").on("dp.change", function(e) {
-                $('#datetimepicker_end').data("DateTimePicker").minDate(e.date);
-            });
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#postFormContact-btn').click(function(){
+            $('#postFormContact').submit(function (e) {
+                e.preventDefault();
+
+                var nom = $('#postFormContact [name="nom"]').val();
+                var email = $('#postFormContact [name="email"]').val();
+                var texte = $('#postFormContact [name="texte"]').val();
+
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
-                    url: 'login',
+                    url: $(this).attr('action'),
                     type: "post",
-                    data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},
-                    success: function(data){
-                        alert(data);
+                    data: {
+                        'nom' : nom,
+                        'email' : email,
+                        'texte' : texte
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        alert('succés');
+                    },
+                    error: function(data){
+                        console.log(data.responseText);
+
+                        var errors = $.parseJSON(data.responseText);
+                        console.log(errors);
+
+                        if(errors.error == "L'événement est terminé.") {
+                            alert(errors.error);
+                            return;
+                        }
+
+                        $.each(errors.error, function(index, value) {
+                            $('#postFormContact #' + index + '-input').addClass('has-error');
+                            $('#postFormContact #' + index + '-input').prepend(value);
+                            /*
+                             $.gritter.add({
+                             title: 'Erreur',
+                             text: value
+                             });
+                             */
+                        });
                     }
                 });
             });
@@ -31,6 +94,7 @@
     </script>
 
 @stop
+
 
 @section('homestyles')
 

@@ -17,45 +17,30 @@ class ContactController extends Controller
 
     public function postForm(Request $request)
     {
-        $args = array(
-            'name'   => FILTER_SANITIZE_ENCODED,
-            'component'    => array('filter'    => FILTER_VALIDATE_INT,
-                'flags'     => FILTER_REQUIRE_ARRAY,
-                'options'   => array('min_range' => 1, 'max_range' => 10)
-            ),
-            'email'     => FILTER_SANITIZE_ENCODED,
-            'texte' => FILTER_SANITIZE_ENCODED
+        $filters = array(
+            'nom'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'email' => FILTER_SANITIZE_EMAIL,
+            'texte' => FILTER_SANITIZE_FULL_SPECIAL_CHARS
             );
+
          if ($request->isMethod('post')) {
                  $this->validate($request, [
                      'nom' => 'required|max:255',
-                     'email' =>'required',
+                     'email' =>'required|max:255',
                      'texte' => 'required'
                  ]);
 
+             $sanitizedInput = filter_var_array($request->input(), $filters);
+
              $id = DB::table('Message')->insertGetId([
-                     'name' => $request->input('nom'),
-                     'email' => $request->input('email'),
-                     'description' => $request->input('texte')
+                     'name' => $sanitizedInput['nom'],
+                     'email' => $sanitizedInput['texte'],
+                     'description' => $sanitizedInput['texte']
                  ]);
 
-             $message = new Message;
+             $returned =  DB::table('Message')->where('id', 118)->value('description');
 
-             $message->name = $request->input('nom');
-             $message->email = $request->input('email');
-             $message->description = htmlspecialchars($request->input('texte'));
-
-             $message->save();
-
-             $returned =  DB::table('Message')->where('id', 110)->value('description');
-
-//             $message = new Message([
-//                 'name' => $request->input('nom'),
-//                 'email' => $request->input('email'),
-//                 'description' => $request->input('texte')
-//             ]);
-
-             return var_dump($request->input());
+         return $returned;
         }
 //        return "coucou";
 //        if(Request::ajax()) {
