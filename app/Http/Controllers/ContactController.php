@@ -24,17 +24,8 @@ class ContactController extends Controller
                 'options'   => array('min_range' => 1, 'max_range' => 10)
             ),
             'email'     => FILTER_SANITIZE_ENCODED,
-            'texte' => FILTER_SANITIZE_ENCODED,
-            'testscalar'   => array(
-                'filter' => FILTER_VALIDATE_INT,
-                'flags'  => FILTER_REQUIRE_SCALAR,
-            ),
-            'testarray'    => array(
-                'filter' => FILTER_VALIDATE_INT,
-                'flags'  => FILTER_REQUIRE_ARRAY,
-            )
-
-        );
+            'texte' => FILTER_SANITIZE_ENCODED
+            );
          if ($request->isMethod('post')) {
                  $this->validate($request, [
                      'nom' => 'required|max:255',
