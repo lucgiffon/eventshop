@@ -35,10 +35,14 @@
                 var address = $('#postFormEvent [name="address"]').val();
                 var department = $('#postFormEvent [name="department"]').val();
 
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
                     url: $(this).attr('action'),
                     type: "post",
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     data: {
                         //hidden
                         'event' : {{ $event->id }},

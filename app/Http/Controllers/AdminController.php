@@ -10,7 +10,6 @@ use App\EventPicture;
 use App\Eat;
 use App\Participant;
 use Admin;
-use Storage;
 
 class AdminController extends Controller
 {
@@ -97,6 +96,35 @@ class AdminController extends Controller
         $pathToFile = storage_path('zip/attestations.zip');
 
         return response()->download($pathToFile);
+    }
+
+    public function getEat($days, $idevent)
+    {
+        $from = date('Y-m-d', strtotime('tomorrow UTC'));
+        $to = date('Y-m-d', strtotime('+' . $days . 'days UTC'));
+
+        $eatsValue = Eat::whereEventId($idevent)->whereBetween('date', array($from, $to))->get(['date']);
+
+        $eatsCount = [];
+
+        foreach($eatsValue as $eat)
+        {
+            $dateToInt = str_replace(['/', '-'], '', $eat->date);
+
+            if(!isset($eatsCount[$dateToInt]))
+            {
+                $eatsCount[$dateToInt]['value'] = 1;
+                $eatsCount[$dateToInt]['date'] = $eat->date;
+            }
+            else
+                $eatsCount[$dateToInt]['value']++;
+        }
+
+        $eatsCount = array_values($eatsCount);
+
+        // TODO : JOINDRE DATE ET VALUE POUR FAIRE COMME UN DATE DE MORRIS.JS
+
+        return response()->json($eatsCount);
     }
 
     public function getSecond()

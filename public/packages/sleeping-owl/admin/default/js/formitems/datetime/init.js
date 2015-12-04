@@ -15,9 +15,12 @@ $(function ()
 		});
 	});
 
-    $('#enddate').data("DateTimePicker").minDate($('#begindate').data("DateTimePicker").date());
+	if ($('#enddate').length )
+	{
+		$('#enddate').data("DateTimePicker").minDate($('#begindate').data("DateTimePicker").date());
 
-	$('#begindate').on("dp.change", function(e) {
-		$('#enddate').data("DateTimePicker").minDate(e.date);
-	});
+		$('#begindate').on("dp.change", function(e) {
+			$('#enddate').data("DateTimePicker").minDate(e.date);
+		});
+	}
 });

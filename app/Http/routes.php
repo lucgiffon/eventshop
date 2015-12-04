@@ -25,3 +25,6 @@ Route::get('downloadAttestation/{fileId}',
 Route::get('downloadAttestationZip/{ids}',
     'AdminController@downloadAttestationZip'
 );
+
+Route::post('getEat/{days}/{idevent}',
+    'AdminController@getEat');

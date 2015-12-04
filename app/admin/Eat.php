@@ -17,6 +17,18 @@ Admin::model(App\Eat::class)->title('Repas')->alias('Eat')->display(function ()
         Column::datetime('updated_at')->label('Date dernière modification')->format('d/m/Y'),
     ]);
 
+    $display->columnFilters([
+        ColumnFilter::range()->from(
+            ColumnFilter::date()->placeholder('From Date')->format('d/m/Y')
+        )->to(
+            ColumnFilter::date()->placeholder('To Date')->format('d/m/Y')
+        ),
+        null,
+        null,
+        null,
+        null
+    ]);
+
     return $display;
 })->createAndEdit(function ()
 {

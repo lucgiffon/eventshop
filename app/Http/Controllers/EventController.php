@@ -94,10 +94,13 @@ class EventController extends Controller
                 'department' => 'required|max:255'
             ];
 
-            foreach($request->input('dates') as $key => $val)
-            {
-                $rules['dates.' . $key] = 'date_format:"d/m/Y"|before:' . $event->enddate . '|after:' . $begin_date;
-            }
+            $dates = $request->input('dates');
+
+            if(isset($dates))
+                foreach($dates as $key => $val)
+                {
+                    $rules['dates.' . $key] = 'date_format:"d/m/Y"|before:' . $event->enddate . '|after:' . $begin_date;
+                }
 
             $v2 = Validator::make($request->except('id'), $rules);
 
@@ -127,13 +130,14 @@ class EventController extends Controller
 
             $event->participant()->save($participant);
 
-            foreach($request->input('dates') as $key => $val)
-            {
-                $eat = new Eat(['date' => date('Y-m-d', strtotime(str_replace('/', '-', $val)))]);
-                $eat->participant()->associate($participant);
-                $eat->event()->associate($event);
-                $eat->save();
-            }
+            if(isset($dates))
+                foreach($dates as $key => $val)
+                {
+                    $eat = new Eat(['date' => date('Y-m-d', strtotime(str_replace('/', '-', $val)))]);
+                    $eat->participant()->associate($participant);
+                    $eat->event()->associate($event);
+                    $eat->save();
+                }
         }
     }
 

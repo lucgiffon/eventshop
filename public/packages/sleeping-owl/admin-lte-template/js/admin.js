@@ -35,15 +35,37 @@ $(function ()
         Morris.Donut({
             element: 'participantsByExpertiseCount',
             data: dataparticipantsByExpertiseCount,
-            colors: [ '#D2527F', '#F1A9A0', '#E26A6A']
+            colors: [ '#D2527F', '#F1A9A0', '#E26A6A'],
+			resize: true
         });
 }
 
-    if (typeof participantsByGenderCount != 'undefined') {
+    if (typeof dataparticipantsByGenderCount != 'undefined') {
         Morris.Donut({
             element: 'participantsByGenderCount',
             data: dataparticipantsByGenderCount,
-            colors: ['#E9D460', '#EB9532', '#F4B350']
+            colors: ['#E9D460', '#EB9532', '#F4B350'],
+			resize: true
         });
     }
+	/*
+	if (typeof dataEat != 'undefined') {
+		console.log(dataEat);
+
+		Morris.Line({
+			// ID of the element in which to draw the chart.
+			element: 'eat',
+			// Chart data records -- each entry in this array corresponds to a point on
+			// the chart.
+			data: dataEat,
+			// The name of the data record attribute that contains x-values.
+			xkey: 'date',
+			// A list of names of data record attributes that contain y-values.
+			ykeys: ['value'],
+			// Labels for the ykeys -- will be displayed when you hover over the
+			// chart.
+			labels: ['Value']
+		});
+	}
+	*/
 });
