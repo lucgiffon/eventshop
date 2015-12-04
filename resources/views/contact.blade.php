@@ -70,12 +70,12 @@
                         console.log(data.responseText);
 
                         var errors = $.parseJSON(data.responseText);
-                        console.log(errors);
+//                        console.log(XHR.responseText);
 
-                        if(errors.error == "L'événement est terminé.") {
-                            alert(errors.error);
-                            return;
-                        }
+//                        if(errors.error == "Le champ E-mail est obligatoire.") {
+//                            alert(errors.error);
+//                            return;
+//                        }
 
                         $.each(errors.error, function(index, value) {
                             $('#postFormContact #' + index + '-input').addClass('has-error');
@@ -151,15 +151,15 @@
                         <div class="panel-body">
                             {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact']) !!}
                             {{ csrf_field() }}
-                            <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
+                            <div id="nom-input" class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
                                 {!! $errors->first('nom', '<small class="help-block">:message</small>') !!}
                             </div>
-                            <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
+                            <div id="email-input" class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
                                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Votre email']) !!}
                                 {!! $errors->first('email', '<small class="help-block">:message</small>') !!}
                             </div>
-                            <div class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
+                            <div id="texte-input" class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
                                 {!! Form::textarea ('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre message']) !!}
                                 {!! $errors->first('texte', '<small class="help-block">:message</small>') !!}
                             </div>

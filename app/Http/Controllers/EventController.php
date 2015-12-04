@@ -69,7 +69,7 @@ class EventController extends Controller
             'gender' => FILTER_SANITIZE_NUMBER_INT,
             'expertise' => FILTER_SANITIZE_NUMBER_INT,
             'country' => FILTER_SANITIZE_NUMBER_INT,
-            'dates' => FILTER_UNSAFE_RAW // sanitization of the date field is done later
+            'dates' => FILTER_UNSAFE_RAW // sanitization of the date field is done after.
         );
 
         if ($request->isMethod('post')) {
