@@ -60,7 +60,7 @@ class EventController extends Controller
         if ($request->isMethod('post')) {
             /* Validation des données */
 
-            $v1 = Validator::make(['event' => $request->input('event')], ['event' => 'required|numeric|exists:event,id,isactive,1']);
+            $v1 = Validator::make(['event' => $request->input('event')], ['event' => 'required|numeric|exists:Event,id,isactive,1']);
 
             if ($v1->fails()) {
                 return response()->json(array(
@@ -69,17 +69,18 @@ class EventController extends Controller
             }
 
             $event = Event::whereId($request->input('event'))->first();
-            $tomorrow = date('d/m/Y', strtotime('tomorrow UTC'));
+            $tomorrow = date('Y-m-d', strtotime('tomorrow UTC'));
 
-            if($tomorrow > date('d/m/Y', strtotime($event->enddate))) {
+            if($tomorrow > date('Y-m-d', strtotime($event->enddate))) {
                 return response()->json(array(
                     'error' => "L'événement est terminé."
                 ), 422); // 422 being the HTTP code for an Unprocessable Entity.
             }
-            else if($tomorrow > date('d/m/Y', strtotime($event->begindate)))
-                $begin_date = date('d/m/Y', strtotime('today UTC'));
+
+            else if($tomorrow > date('Y-m-d', strtotime($event->begindate)))
+                $begin_date = date('Y-m-d', strtotime('today UTC'));
             else
-                $begin_date = date('d/m/Y', strtotime($event->begindate));
+                $begin_date = date('Y-m-d', strtotime($event->begindate));
 
             $rules = [
                 'gender' => 'required|exists:gender,id',
