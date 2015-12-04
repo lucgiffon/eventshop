@@ -127,6 +127,7 @@
                                             <span class="input-group-addon">Date de début</span>
                                             {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
                                             {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+
                                         </div>
                                     </div>
                                 </div>
@@ -157,4 +158,5 @@
             </div>
         </div>
     </div>
+
 @stop

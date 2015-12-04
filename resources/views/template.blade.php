@@ -18,7 +18,9 @@
     <link href="{{ URL::asset('css/rotating-card.css') }}" rel="stylesheet" />
 
     <!-- Custom CSS -->
+
     <link href="{{ URL::asset('css/modern-business.css') }}" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="{{ URL::asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -51,8 +53,17 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
+    <script href="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+    <script href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
     <!--Dynamic scripts added from a view would be pasted here-->
     @yield('homescripts')
+
+    <script type="text/javascript">
+        $(function () {
+            $('#event_begin_date').datetimepicker();
+        });
+    </script>
 </body>
 
 </html>
