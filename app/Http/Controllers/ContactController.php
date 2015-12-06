@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Message;
 
 class ContactController extends Controller
 {
@@ -13,12 +16,39 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    public function postForm()
+    public function postForm(Request $request)
     {
-        if(Request::ajax()) {
-            $data = Input::all();
-            print_r($data);
-            die;
+        $filters = array(
+            'nom'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+            'email' => FILTER_SANITIZE_EMAIL,
+            'texte' => FILTER_SANITIZE_FULL_SPECIAL_CHARS
+            );
+
+         if ($request->isMethod('post')) {
+                 $rules =  [
+                     'nom' => 'required|max:255',
+                     'email' =>'required|max:255',
+                     'texte' => 'required'
+                 ];
+             $v1 = Validator::make($request->except('id'), $rules);
+
+             if ($v1->fails()) {
+                 return response()->json(array(
+                     'error' => $v1->messages()
+                 ), 422); // 422 being the HTTP code for an Unprocessable Entity.
+             }
+
+             $sanitizedInput = filter_var_array($request->input(), $filters);
+
+             $id = DB::table('Message')->insertGetId([
+                     'name' => $sanitizedInput['nom'],
+                     'email' => $sanitizedInput['texte'],
+                     'description' => $sanitizedInput['texte']
+                 ]);
+
+            // $returned =  DB::table('Message')->where('id', 118)->value('description');
+
+         //return $returned;
         }
     }
 

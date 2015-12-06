@@ -11,7 +11,7 @@ class CountryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Eat')->delete();
+        DB::table('Country')->delete();
 
         // Note: these dump files must be generated with DELETE (or TRUNCATE) + INSERT statements
         $sql = file_get_contents(__DIR__ . '/country.sql');
