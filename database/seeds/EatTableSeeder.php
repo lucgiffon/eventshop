@@ -30,24 +30,21 @@ class EatTableSeeder extends Seeder
         DB::table('Eat')->delete();
 
         foreach(Event_Participant::all() as $participation)
-    {
-            $participant_id = $participation->participant_id;
-            $event_id = $participation->event_id;
-
-            $event = Event::find($event_id);
-
-            for($i = 0; $i < 5; $i++)
-            {
-                $date = rand_date($event->begindate, $event->enddate);
-
-                $eat = Eat::where('date', $date)->where('participant_id', $participant_id)->first();
-
-                if(!count($eat))
+        {
+            try {
+                if ($participation->participant_id % 7 != 0) {
+                    $participant_id = $participation->participant_id;
+                    $event_id = $participation->event_id;
+                    $date = Event::where('id', '=', $event_id)->first()->begindate;
                     DB::table('Eat')->insert([
                         'participant_id' => $participant_id,
                         'date' => $date,
                         'event_id' => $event_id,
                     ]);
+                }
+            }
+            catch (Exception $e) {
+                    echo "Exception reçue: " . $e->getMessage();
             }
         }
     }
