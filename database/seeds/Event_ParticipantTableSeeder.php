@@ -13,11 +13,16 @@ class Event_ParticipantTableSeeder extends Seeder
     {
         DB::table('event_participant')->delete();
 
-        for ($i = 1; $i <= 100; ++$i) {
-            DB::table('event_participant')->insert([
-                'participant_id' => rand(1, 1000),
-                'event_id' => rand(1, 100)
-            ]);
+        for ($i = 1; $i <= 1000; ++$i) {
+            try {
+                DB::table('event_participant')->insert([
+                    'participant_id' => rand(1, 1000),
+                    'event_id' => rand(1, 100)
+                ]);
+            }
+            catch (Exception $e) {
+                echo "Exception reçue: " . $e->getMessage();
+            }
 
         }
     }

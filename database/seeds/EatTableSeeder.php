@@ -17,16 +17,20 @@ class EatTableSeeder extends Seeder
 
         foreach(Event_Participant::all() as $participation)
         {
-            if ($participation->idparticipant % 2 == 0)
-            {
-                $participant_id = $participation->participant_id;
-                $event_id = $participation->event_id;
-                $date = Event::where('id', '=', $event_id)->first()->begindate;
-                DB::table('Eat')->insert([
-                    'participant_id' => $participant_id,
-                    'date' => $date,
-                    'event_id' => $event_id,
-                ]);
+            try {
+                if ($participation->participant_id % 7 != 0) {
+                    $participant_id = $participation->participant_id;
+                    $event_id = $participation->event_id;
+                    $date = Event::where('id', '=', $event_id)->first()->begindate;
+                    DB::table('Eat')->insert([
+                        'participant_id' => $participant_id,
+                        'date' => $date,
+                        'event_id' => $event_id,
+                    ]);
+                }
+            }
+            catch (Exception $e) {
+                    echo "Exception reçue: " . $e->getMessage();
             }
         }
     }
