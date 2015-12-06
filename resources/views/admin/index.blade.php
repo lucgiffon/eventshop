@@ -86,7 +86,7 @@
                     resize: true
                 });
             },
-            error: function (xhr, ajaxOptions, thrownError) {
+            error: function (xhr) {
                 console.log(xhr.responseText);
             }
         })

@@ -83,9 +83,9 @@ class EventController extends Controller
                 $begin_date = date('Y-m-d', strtotime($event->begindate));
 
             $rules = [
-                'gender' => 'required|exists:gender,id',
-                'expertise' => 'required|exists:expertise,id',
-                'country' => 'required|exists:country,id',
+                'gender' => 'required|exists:Gender,id',
+                'expertise' => 'required|exists:Expertise,id',
+                'country' => 'required|exists:Country,id',
 
                 'lastname' => 'required|max:255',
                 'firstname' => 'required|max:255',

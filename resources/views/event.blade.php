@@ -21,6 +21,15 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
+            var panel = $('.panel').collapse();
+            panel.on('hidden.bs.collapse', function () {
+                panelBody = $('.panel-body');
+                panelBody.addClass('text-center text-success');
+                panelBody.html('Votre participation a bien été prise en compte.');
+                $('.panel-footer').html('');
+                $('.panel').collapse('show');
+            });
+
             $('#postFormEvent').submit(function (e) {
                 e.preventDefault();
 
@@ -60,9 +69,8 @@
 
                         'dates' : datepicker_eat.datepicker("getDates").map(function(date){return moment(date).format('DD/MM/YYYY')})
                     },
-                    success: function (data) {
-                        console.log(data);
-                        alert('succés');
+                    success: function () {
+                        panel.collapse('hide');
                     },
                     error: function(data){
                         console.log(data.responseText);
@@ -78,12 +86,6 @@
                         $.each(errors.error, function(index, value) {
                             $('#postFormEvent #' + index + '-input').addClass('has-error');
                             $('#postFormEvent #' + index + '-input').prepend(value);
-                            /*
-                            $.gritter.add({
-                                title: 'Erreur',
-                                text: value
-                            });
-                            */
                         });
                     }
                 });
