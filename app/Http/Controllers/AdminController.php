@@ -20,6 +20,8 @@ class AdminController extends Controller
         $pictureCount = EventPicture::count();
         $eatCount = Eat::count();
 
+        $eventAll = Event::all();
+
         $expertises = Expertise::all();
         $participantsByExpertiseCount = [];
 
@@ -45,7 +47,8 @@ class AdminController extends Controller
                                         'participantsByExpertiseCount' => $participantsByExpertiseCount,
                                         'participantsByGenderCount' => $participantsByGenderCount,
                                         'pictureCount' => $pictureCount,
-                                        'eatCount' => $eatCount]);
+                                        'eatCount' => $eatCount,
+                                        'eventAll' => $eventAll]);
 
         return Admin::view($content, 'Accueil');
     }
@@ -121,8 +124,6 @@ class AdminController extends Controller
         }
 
         $eatsCount = array_values($eatsCount);
-
-        // TODO : JOINDRE DATE ET VALUE POUR FAIRE COMME UN DATE DE MORRIS.JS
 
         return response()->json($eatsCount);
     }
