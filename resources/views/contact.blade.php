@@ -2,33 +2,33 @@
 
 {{--@section('homescripts')--}}
 
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
+{{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
+{{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
 
-    {{--<script type="text/javascript">--}}
-        {{--$(function () {--}}
-            {{--$('#datetimepicker_begin').datetimepicker({locale: 'fr'});--}}
-            {{--$('#datetimepicker_end').datetimepicker({locale: 'fr'});--}}
+{{--<script type="text/javascript">--}}
+{{--$(function () {--}}
+{{--$('#datetimepicker_begin').datetimepicker({locale: 'fr'});--}}
+{{--$('#datetimepicker_end').datetimepicker({locale: 'fr'});--}}
 
-            {{--$("#datetimepicker_begin").on("dp.change", function(e) {--}}
-                {{--$('#datetimepicker_end').data("DateTimePicker").minDate(e.date);--}}
-            {{--});--}}
-        {{--});--}}
-    {{--</script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--$(document).ready(function(){--}}
-            {{--$('#postFormContact-btn').click(function(){--}}
-                {{--$.ajax({--}}
-                    {{--url: 'login',--}}
-                    {{--type: "post",--}}
-                    {{--data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},--}}
-                    {{--success: function(data){--}}
-                        {{--alert(data);--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--});--}}
-        {{--});--}}
-    {{--</script>--}}
+{{--$("#datetimepicker_begin").on("dp.change", function(e) {--}}
+{{--$('#datetimepicker_end').data("DateTimePicker").minDate(e.date);--}}
+{{--});--}}
+{{--});--}}
+{{--</script>--}}
+{{--<script type="text/javascript">--}}
+{{--$(document).ready(function(){--}}
+{{--$('#postFormContact-btn').click(function(){--}}
+{{--$.ajax({--}}
+{{--url: 'login',--}}
+{{--type: "post",--}}
+{{--data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},--}}
+{{--success: function(data){--}}
+{{--alert(data);--}}
+{{--}--}}
+{{--});--}}
+{{--});--}}
+{{--});--}}
+{{--</script>--}}
 
 {{--@stop--}}
 
@@ -41,6 +41,19 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
+
+            var panel = $('.contactform_wrapper').collapse();
+            panel.on('hidden.bs.collapse', function (e) {
+                if ($(this).is(e.target)) {
+                    panelBody = $('.contact_form-body');
+                    panelBody.addClass('text-center text-success');
+                    panelBody.html('Votre message a été transmis aux administrateurs.');
+                    $('.panel-footer').html('');
+                    $('.contactform_wrapper').collapse('show');
+                }
+            });
+
+
             $('#postFormContact').submit(function (e) {
                 e.preventDefault();
 
@@ -64,7 +77,9 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        alert('succés');
+                        $('.contactform_wrapper').collapse('hide');
+//                        alert('succés');
+
                     },
                     error: function(data){
                         console.log(data.responseText);
@@ -100,11 +115,11 @@
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-@stop
+    @stop
 
-@section('contenu')
+    @section('contenu')
 
-    <!-- Page Heading/Breadcrumbs -->
+            <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Nous contacter
@@ -139,15 +154,16 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="contactform_wrapper">
-                <div class="panel panel-default contact_form">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            {{--<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">--}}
+                <div class="contact_form-body">
+                    <div class="panel panel-default contact_form">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                {{--<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">--}}
                                 Contactez l'administrateur
-                          {{--  </a>--}}
-                        </h4>
-                    </div>
-                   {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
+                                {{--  </a>--}}
+                            </h4>
+                        </div>
+                        {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
                         <div class="panel-body">
                             {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact']) !!}
                             {{ csrf_field() }}
@@ -164,61 +180,62 @@
                                 {!! $errors->first('texte', '<small class="help-block">:message</small>') !!}
                             </div>
                         </div>
-                   {{-- </div>--}}
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Proposer un événement (optionnel)
-                            </a>
-                        </h4>
+                        {{-- </div>--}}
                     </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            <div class="form-group {!! $errors->has('EventName') ? 'has-error' : '' !!}">
-                                {!! Form::text('EventName', null, ['class' => 'form-control', 'placeholder' => "Titre de l'événement"]) !!}
-                                {!! $errors->first('EventName', '<small class="help-block">:message</small>') !!}
-                            </div>
-                            <div class="form-group {!! $errors->has('EventAddr') ? 'has-error' : '' !!}">
-                                {!! Form::text ('EventAddr', null, ['class' => 'form-control', 'placeholder' => "Adresse de l'événement"]) !!}
-                                {!! $errors->first('EventAddr', '<small class="help-block">:message</small>') !!}
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
-                                        <div class="input-group date">
-                                            <span class="input-group-addon">Date de début</span>
-                                            {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
-                                            {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Proposer un événement (optionnel)
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <div class="form-group {!! $errors->has('EventName') ? 'has-error' : '' !!}">
+                                    {!! Form::text('EventName', null, ['class' => 'form-control', 'placeholder' => "Titre de l'événement"]) !!}
+                                    {!! $errors->first('EventName', '<small class="help-block">:message</small>') !!}
+                                </div>
+                                <div class="form-group {!! $errors->has('EventAddr') ? 'has-error' : '' !!}">
+                                    {!! Form::text ('EventAddr', null, ['class' => 'form-control', 'placeholder' => "Adresse de l'événement"]) !!}
+                                    {!! $errors->first('EventAddr', '<small class="help-block">:message</small>') !!}
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">Date de début</span>
+                                                {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
+                                                {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">Date de fin</span>
+                                                {!! Form::text ('EventEndDate', null, ['id' => 'datetimepicker_end', 'class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
+                                                {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
-                                        <div class="input-group date">
-                                            <span class="input-group-addon">Date de fin</span>
-                                            {!! Form::text ('EventEndDate', null, ['id' => 'datetimepicker_end', 'class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
-                                            {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
-                                        </div>
-                                    </div>
+                                <div class="form-group {!! $errors->has('EventDescr') ? 'has-error' : '' !!}">
+                                    {!! Form::textarea ('EventDescr', null, ['class' => 'form-control', 'placeholder' => "Description de l'événement"]) !!}
+                                    {!! $errors->first('EventDescr', '<small class="help-block">:message</small>') !!}
                                 </div>
-                            </div>
-                            <div class="form-group {!! $errors->has('EventDescr') ? 'has-error' : '' !!}">
-                                {!! Form::textarea ('EventDescr', null, ['class' => 'form-control', 'placeholder' => "Description de l'événement"]) !!}
-                                {!! $errors->first('EventDescr', '<small class="help-block">:message</small>') !!}
-                            </div>
-                            <div class="form-group {!! $errors->has('EventPicture') ? 'has-error' : '' !!}">
-                                <p>Choisissez un logo pour votre événement: </p>
-                                {!!  Form::file('EventPicture', null, ['class' => 'form-control']) !!}
-                                {!! $errors->first('EventPicture', '<small class="help-block">:message</small>') !!}
+                                <div class="form-group {!! $errors->has('EventPicture') ? 'has-error' : '' !!}">
+                                    <p>Choisissez un logo pour votre événement: </p>
+                                    {!!  Form::file('EventPicture', null, ['class' => 'form-control']) !!}
+                                    {!! $errors->first('EventPicture', '<small class="help-block">:message</small>') !!}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary', 'id' => 'postFormContact-btn']) !!}
+                    {!! Form::close() !!}
                 </div>
-                {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary', 'id' => 'postFormContact-btn']) !!}
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

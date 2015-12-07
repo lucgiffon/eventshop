@@ -35,12 +35,18 @@ class EatTableSeeder extends Seeder
                 if ($participation->participant_id % 7 != 0) {
                     $participant_id = $participation->participant_id;
                     $event_id = $participation->event_id;
-                    $date = Event::where('id', '=', $event_id)->first()->begindate;
-                    DB::table('Eat')->insert([
-                        'participant_id' => $participant_id,
-                        'date' => $date,
-                        'event_id' => $event_id,
-                    ]);
+                    $date1 = Event::where('id', '=', $event_id)->first()->begindate;
+                    $date2 = Event::where('id', '=', $event_id)->first()->enddate;
+                    $nbr_eat = 0;
+                    while ($nbr_eat < 10) {
+                        $date = rand_date($date1, $date2);
+                        DB::table('Eat')->insert([
+                            'participant_id' => $participant_id,
+                            'date' => $date,
+                            'event_id' => $event_id,
+                        ]);
+                        $nbr_eat++;
+                    }
                 }
             }
             catch (Exception $e) {
