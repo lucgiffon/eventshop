@@ -4,6 +4,7 @@ use Illuminate\View\View;
 use SleepingOwl\Admin\Interfaces\TemplateInterface;
 use SleepingOwl\Admin\Menu\MenuItem;
 use SleepingOwl\Admin\Model\ModelConfiguration;
+use App\Message;
 
 class Admin
 {
@@ -138,6 +139,11 @@ class Admin
 	public function getMenu()
 	{
 		return $this->menu->items();
+	}
+
+	public function getMessages()
+	{
+
 	}
 
 	/**

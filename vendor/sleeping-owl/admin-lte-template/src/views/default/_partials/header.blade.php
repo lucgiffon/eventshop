@@ -1,4 +1,4 @@
-<a href="#" class="logo">{{{ config('admin.title') }}}</a>
+<a href="#" class="logo">{{ config('admin.title') }}</a>
 <nav class="navbar navbar-static-top" role="navigation">
 	<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 		<span class="sr-only">Toggle navigation</span>
@@ -8,6 +8,9 @@
 	</a>
 	<div class="navbar-custom-menu">
 		<ul class="nav navbar-nav">
+
+			@include(AdminTemplate::view('_partials.messages'))
+
 			<li class="dropdown user user-menu">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<i class="fa fa-user fa-fw"></i>
