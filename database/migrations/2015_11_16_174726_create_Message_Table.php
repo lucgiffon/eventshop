@@ -18,11 +18,21 @@ class CreateMessageTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('description');
+            $table->integer('event_id')->unsigned();
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
-        });    }
+        });
+
+        Schema::table('Message', function(Blueprint $table) {
+            $table->foreign('event_id')->references('id')->on('Event')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
+
+
+    }
 
     /**
      * Reverse the migrations.
@@ -31,6 +41,9 @@ class CreateMessageTable extends Migration
      */
     public function down()
     {
+        Schema::table('event_participant', function(Blueprint $table) {
+            $table->dropForeign('message_event_id_foreign');
+        });
         Schema::drop('Message');
     }
 }

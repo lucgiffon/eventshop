@@ -16,6 +16,11 @@ class Message extends Model
 
     public $timestamps = true;
 
+    public function event()
+    {
+        return $this->hasOne('App\Event');
+    }
+
 //    protected $hidden = [
 //        'created_at',
 //        'updated_at'

@@ -59,11 +59,7 @@
     <!--Dynamic scripts added from a view would be pasted here-->
     @yield('homescripts')
 
-    <script type="text/javascript">
-        $(function () {
-            $('#event_begin_date').datetimepicker();
-        });
-    </script>
+
 </body>
 
 </html>

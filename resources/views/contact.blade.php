@@ -1,43 +1,35 @@
 @extends('template')
 
-{{--@section('homescripts')--}}
-
-{{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
-{{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
-
-{{--<script type="text/javascript">--}}
-{{--$(function () {--}}
-{{--$('#datetimepicker_begin').datetimepicker({locale: 'fr'});--}}
-{{--$('#datetimepicker_end').datetimepicker({locale: 'fr'});--}}
-
-{{--$("#datetimepicker_begin").on("dp.change", function(e) {--}}
-{{--$('#datetimepicker_end').data("DateTimePicker").minDate(e.date);--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
-{{--<script type="text/javascript">--}}
-{{--$(document).ready(function(){--}}
-{{--$('#postFormContact-btn').click(function(){--}}
-{{--$.ajax({--}}
-{{--url: 'login',--}}
-{{--type: "post",--}}
-{{--data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},--}}
-{{--success: function(data){--}}
-{{--alert(data);--}}
-{{--}--}}
-{{--});--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
-
-{{--@stop--}}
-
 @section('homescripts')
 
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/locales/bootstrap-datepicker.fr.min.js"></script>--}}
-    {{--<script src="{{ URL::asset('js/jquery.gritter.min.js') }}"></script>--}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script src="{{ URL::asset('js/jquery.gritter.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $( "#datepicker_begin" ).datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                startDate: "{{ date('d/m/Y', strtotime('tomorrow UTC')) }}",
+            })
+            .on('changeDate', function(e)
+            {
+                $("#datepicker_end").datepicker('setStartDate', e.date);
+            });
+
+            $( "#datepicker_end" ).datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+
+            })
+            .on('changeDate', function(e)
+            {
+                $("#datepicker_begin").datepicker('setEndDate', e.date);
+            });
+        });
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -57,10 +49,18 @@
             $('#postFormContact').submit(function (e) {
                 e.preventDefault();
 
+                var formData = new FormData(this);
+
                 var nom = $('#postFormContact [name="nom"]').val();
                 var email = $('#postFormContact [name="email"]').val();
                 var texte = $('#postFormContact [name="texte"]').val();
 
+                var eventName = $('#postFormContact [name="eventName"]').val();
+                var eventAddr = $('#postFormContact [name="eventAddr"]').val();
+                var eventBeginDate = $('#postFormContact [name="eventBeginDate"]').val();
+                var eventEndDate = $('#postFormContact [name="eventEndDate"]').val();
+                var eventDescr = $('#postFormContact [name="eventDescr"]').val();
+                var eventPicture = $('#postFormContact [name="eventPicture"]').val();
 
                 $.ajaxSetup({
                     headers: {
@@ -70,37 +70,32 @@
                 $.ajax({
                     url: $(this).attr('action'),
                     type: "post",
-                    data: {
+                    contentType: false, // obligatoire pour de l'upload
+                    processData: false,
+                    /*data: {
                         'nom' : nom,
                         'email' : email,
-                        'texte' : texte
-                    },
+                        'texte' : texte,
+                        'eventName' : eventName,
+                        'eventAddr' : eventAddr,
+                        'eventBeginDate' : eventBeginDate,
+                        'eventEndDate' : eventEndDate,
+                        'eventDescr' : eventDescr,
+                        'eventPicture' : eventPicture
+                    },*/
+                    data: formData,
                     success: function (data) {
                         console.log(data);
                         $('.contactform_wrapper').collapse('hide');
-//                        alert('succés');
-
                     },
                     error: function(data){
                         console.log(data.responseText);
 
                         var errors = $.parseJSON(data.responseText);
-//                        console.log(XHR.responseText);
-
-//                        if(errors.error == "Le champ E-mail est obligatoire.") {
-//                            alert(errors.error);
-//                            return;
-//                        }
-
                         $.each(errors.error, function(index, value) {
                             $('#postFormContact #' + index + '-input').addClass('has-error');
                             $('#postFormContact #' + index + '-input').prepend(value);
-                            /*
-                             $.gritter.add({
-                             title: 'Erreur',
-                             text: value
-                             });
-                             */
+
                         });
                     }
                 });
@@ -113,7 +108,10 @@
 
 @section('homestyles')
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+{{--
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+--}}
 
     @stop
 
@@ -155,6 +153,8 @@
         <div class="col-sm-12">
             <div class="contactform_wrapper">
                 <div class="contact_form-body">
+                    {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact', 'files' => true]) !!}
+                    {{ csrf_field() }}
                     <div class="panel panel-default contact_form">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -165,8 +165,7 @@
                         </div>
                         {{-- <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">--}}
                         <div class="panel-body">
-                            {!! Form::open(['url' => 'postFormContact', 'method' => 'POST', 'id' => 'postFormContact']) !!}
-                            {{ csrf_field() }}
+
                             <div id="nom-input" class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
                                 {!! $errors->first('nom', '<small class="help-block">:message</small>') !!}
@@ -190,52 +189,52 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div id="collapseTwo" class="panel-collapse" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                <div class="form-group {!! $errors->has('EventName') ? 'has-error' : '' !!}">
-                                    {!! Form::text('EventName', null, ['class' => 'form-control', 'placeholder' => "Titre de l'événement"]) !!}
-                                    {!! $errors->first('EventName', '<small class="help-block">:message</small>') !!}
+                                <div id="eventName-input" class="form-group {!! $errors->has('eventName') ? 'has-error' : '' !!}">
+                                    {!! Form::text('eventName', null, ['class' => 'form-control', 'placeholder' => "Titre de l'événement"]) !!}
+                                    {!! $errors->first('eventName', '<small class="help-block">:message</small>') !!}
                                 </div>
-                                <div class="form-group {!! $errors->has('EventAddr') ? 'has-error' : '' !!}">
-                                    {!! Form::text ('EventAddr', null, ['class' => 'form-control', 'placeholder' => "Adresse de l'événement"]) !!}
-                                    {!! $errors->first('EventAddr', '<small class="help-block">:message</small>') !!}
+                                <div id="eventAddr-input" class="form-group {!! $errors->has('eventAddr') ? 'has-error' : '' !!}">
+                                    {!! Form::text ('eventAddr', null, ['class' => 'form-control', 'placeholder' => "Adresse de l'événement"]) !!}
+                                    {!! $errors->first('eventAddr', '<small class="help-block">:message</small>') !!}
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="form-group {!! $errors->has('EventBeginDate') ? 'has-error' : '' !!}">
-                                            <div class="input-group date">
+                                        <div class="form-group {!! $errors->has('eventBeginDate') ? 'has-error' : '' !!}">
+                                            <div id="eventBeginDate-input" class="input-group date">
                                                 <span class="input-group-addon">Date de début</span>
-                                                {!! Form::text ('EventBeginDate', null, ['id' => 'datetimepicker_begin', 'class' => 'form-control', 'placeholder' => "Date de début"]) !!}
-                                                {!! $errors->first('EventBeginDate', '<small class="help-block">:message</small>') !!}
+                                                {!! Form::text ('eventBeginDate', null, ['id' => 'datepicker_begin', 'class' => 'form-control']) !!}
+                                                {!! $errors->first('eventBeginDate', '<small class="help-block">:message</small>') !!}
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="form-group {!! $errors->has('EventEndDate') ? 'has-error' : '' !!}">
+                                        <div id="eventEndDate-input" class="form-group {!! $errors->has('eventEndDate') ? 'has-error' : '' !!}">
                                             <div class="input-group date">
                                                 <span class="input-group-addon">Date de fin</span>
-                                                {!! Form::text ('EventEndDate', null, ['id' => 'datetimepicker_end', 'class' => 'form-control', 'placeholder' => "Date de fin"]) !!}
-                                                {!! $errors->first('EventEndDate', '<small class="help-block">:message</small>') !!}
+                                                {!! Form::text ('eventEndDate', null, ['id' => 'datepicker_end', 'class' => 'form-control']) !!}
+                                                {!! $errors->first('eventEndDate', '<small class="help-block">:message</small>') !!}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group {!! $errors->has('EventDescr') ? 'has-error' : '' !!}">
-                                    {!! Form::textarea ('EventDescr', null, ['class' => 'form-control', 'placeholder' => "Description de l'événement"]) !!}
-                                    {!! $errors->first('EventDescr', '<small class="help-block">:message</small>') !!}
+                                <div id="eventDescr-input" class="form-group {!! $errors->has('eventDescr') ? 'has-error' : '' !!}">
+                                    {!! Form::textarea ('eventDescr', null, ['class' => 'form-control', 'placeholder' => "Description de l'événement"]) !!}
+                                    {!! $errors->first('eventDescr', '<small class="help-block">:message</small>') !!}
                                 </div>
-                                <div class="form-group {!! $errors->has('EventPicture') ? 'has-error' : '' !!}">
+                                <div id="eventPicture-input" class="form-group {!! $errors->has('eventPicture') ? 'has-error' : '' !!}">
                                     <p>Choisissez un logo pour votre événement: </p>
-                                    {!!  Form::file('EventPicture', null, ['class' => 'form-control']) !!}
-                                    {!! $errors->first('EventPicture', '<small class="help-block">:message</small>') !!}
+                                    {!!  Form::file('eventPicture', null, ['class' => 'form-control']) !!}
+                                    {!! $errors->first('eventPicture', '<small class="help-block">:message</small>') !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                     {!! Form::submit('Envoyer !', ['class' => 'btn btn-primary', 'id' => 'postFormContact-btn']) !!}
                     {!! Form::close() !!}
-                </div>
+                    </div>
             </div>
         </div>
     </div>

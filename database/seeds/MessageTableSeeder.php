@@ -14,6 +14,7 @@ class MessageTableSeeder extends Seeder
         DB::table('Message')->delete();
 
         for($i = 1; $i <= 100; ++$i) {
+
             DB::table('Message')->insert([
                 //'id' => 0,
                 'title' => "Titre" . $i,
@@ -28,7 +29,8 @@ class MessageTableSeeder extends Seeder
                                                     accolas circumfusus, augente nocte adulta terrorem quievere
                                                     paulisper lucem opperientes. arbitrabantur enim nullo
                                                     inpediente transgressi inopino adcursu adposita quaeque
-                                                    vastare, sed in cassum labores pertulere gravissimos."
+                                                    vastare, sed in cassum labores pertulere gravissimos.",
+                'event_id' => $i
             ]);
         }
 

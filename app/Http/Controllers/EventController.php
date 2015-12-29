@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use Excel;
+use View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Eat;
@@ -19,14 +20,16 @@ class EventController extends Controller
     {
         //$eventsMostPopular = Event::orderBy('id', 'ASC')->take(3)->get(); // A REFAIRE QUAND LA TABLE DES PARTICIPANTS AURA ETE SEED PAR LUC
 
-        $eventsMostPopular = Event::with('participant')->get()->sortBy(function($eventsMostPopular)
+        $eventsMostPopular = Event::where('isactive', 1)->with('participant')->get()->sortBy(function($eventsMostPopular)
         {
             return $eventsMostPopular->participant->count();
         }, SORT_REGULAR, true)->take(3);
 
-        $eventsOurSelection = Event::where('selected', 1)->get();
 
-        $eventsNewest = Event::orderBy('id', 'DESC')->take(4)->get();
+        $eventsOurSelection = Event::where('isactive', 1)->where('selected', 1)->get();
+
+
+        $eventsNewest = Event::where('isactive', 1)->orderBy('id', 'DESC')->take(4)->get();
 
         return view('home', ['eventsArray_MostPopular' => $eventsMostPopular,
                             'eventsArray_OurSelection' => $eventsOurSelection,
@@ -35,19 +38,23 @@ class EventController extends Controller
 
     public function listEvent()
     {
-        $eventsShowAll = Event::with('eventpicture')->paginate(15);
+        $eventsShowAll = Event::where('isactive', 1)->with('eventpicture')->paginate(15);
 
         return view('listEvent', ['eventsShowAll' => $eventsShowAll]);
     }
 
     public function index($id)
     {
-        $event = Event::whereId($id)->first();
-        $genders = Gender::lists('name', 'id');
-        $expertises = Expertise::lists('name', 'id');
-        $countries = Country::lists('short_name', 'id');
+        if (Event::whereId($id)->pluck('isactive') == 1) {
+            $event = Event::whereId($id)->first();
+            $genders = Gender::lists('name', 'id');
+            $expertises = Expertise::lists('name', 'id');
+            $countries = Country::lists('short_name', 'id');
 
-        return view('event', ['event' => $event, 'genders' => $genders, 'expertises' => $expertises, 'countries' => $countries,]);
+            return view('event', ['event' => $event, 'genders' => $genders, 'expertises' => $expertises, 'countries' => $countries,]);
+        }
+
+        abort(404);
     }
 
     public function getEventWithId($id)
@@ -58,21 +65,7 @@ class EventController extends Controller
     public function postForm(Request $request)
     {
 
-        $filters = array(
-            'lastname'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'firstname'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'phone'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'adress'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'department'   => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'mail'  => FILTER_SANITIZE_EMAIL,
-            'texte' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'gender' => FILTER_SANITIZE_NUMBER_INT,
-            'expertise' => FILTER_SANITIZE_NUMBER_INT,
-            'country' => FILTER_SANITIZE_NUMBER_INT,
-            'dates' => FILTER_UNSAFE_RAW // sanitization of the date field is done after.
-        );
-
-        if ($request->isMethod('post')) {
+            if ($request->isMethod('post')) {
             /* Validation des données */
 
             $v1 = Validator::make(['event' => $request->input('event')], ['event' => 'required|numeric|exists:Event,id,isactive,1']);
@@ -102,8 +95,8 @@ class EventController extends Controller
                 'expertise' => 'required|exists:Expertise,id',
                 'country' => 'required|exists:Country,id',
 
-                'lastname' => 'required|max:255',
-                'firstname' => 'required|max:255',
+                'lastname' => 'required|max:255|alpha_dash',
+                'firstname' => 'required|max:255|alpha_dash',
                 'mail' => 'required|email', //|unique:participant,email TODO: A VOIR AVEC LES AUTRES
                 'phone' => 'required|numeric',
                 'address' => 'required|max:255',
@@ -125,10 +118,6 @@ class EventController extends Controller
                     'error' => $v2->messages()
                 ), 422); // 422 being the HTTP code for an Unprocessable Entity.
             }
-
-
-
-            $sanitizedInput = filter_var_array($request->input(), $filters);
 
             /* Ajout des données */
             $participant = new Participant([

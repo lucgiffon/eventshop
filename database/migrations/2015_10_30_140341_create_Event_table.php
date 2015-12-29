@@ -14,14 +14,14 @@ class CreateEventTable extends Migration
     {
         Schema::create('Event', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->nullable();
             //$table->subtitle('subtitle', 500);
-            $table->string('logo');
-            $table->date('begindate');
-            $table->date('enddate');
-            $table->string('address');
-            $table->string('mailcontact');
-            $table->text('description');
+            $table->string('logo')->nullable();
+            $table->date('begindate')->nullable();
+            $table->date('enddate')->nullable();
+            $table->string('address')->nullable();
+            $table->string('mailcontact')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('selected');
             $table->boolean('isactive')->default(false);
             $table->timestamp('created_at')
