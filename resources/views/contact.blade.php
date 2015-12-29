@@ -189,7 +189,7 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
                                 <div id="eventName-input" class="form-group {!! $errors->has('eventName') ? 'has-error' : '' !!}">
                                     {!! Form::text('eventName', null, ['class' => 'form-control', 'placeholder' => "Titre de l'événement"]) !!}

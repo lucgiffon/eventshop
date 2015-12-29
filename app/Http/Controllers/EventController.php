@@ -91,16 +91,16 @@ class EventController extends Controller
                 $begin_date = date('Y-m-d', strtotime($event->begindate));
 
             $rules = [
-                'gender' => 'required|exists:Gender,id',
-                'expertise' => 'required|exists:Expertise,id',
-                'country' => 'required|exists:Country,id',
+                'gender' => 'required|numeric|exists:Gender,id',
+                'expertise' => 'required|numeric|exists:Expertise,id',
+                'country' => 'required|numeric|exists:Country,id',
 
-                'lastname' => 'required|max:255|alpha_dash',
-                'firstname' => 'required|max:255|alpha_dash',
+                'lastname' => 'required|max:255|regex:^[a-zA-Z0-9\-\_\'\;\:\!\§\?\$\+\=\&\(\)\[\] ]+$^',
+                'firstname' => 'required|max:255|regex:^[a-zA-Z0-9\-\_\'\;\:\!\§\?\$\+\=\&\(\)\[\] ]+$^',
                 'mail' => 'required|email', //|unique:participant,email TODO: A VOIR AVEC LES AUTRES
                 'phone' => 'required|numeric',
-                'address' => 'required|max:255',
-                'department' => 'required|max:255'
+                'address' => 'required|max:255|regex:^[a-zA-Z0-9\-\_\'\;\:\!\§\?\$\+\=\&\(\)\[\] ]+$^',
+                'department' => 'required|max:255|regex:^[a-zA-Z0-9\-\_\'\;\:\!\§\?\$\+\=\&\(\)\[\] ]+$^'
             ];
 
             $dates = $request->input('dates');
