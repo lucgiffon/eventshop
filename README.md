@@ -1,2 +1,0 @@
-# eventshop
-Projet Web ODI
