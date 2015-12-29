@@ -75,9 +75,9 @@ Admin::model(App\PivotEventParticipant::class)->title('Attestations')->alias('at
         })->store('pdf', false, true);
 
         if($pdf_stored)
-            echo '<html><head><meta charset="UTF-8"></head><body>DEBUG : ' . $pdf_stored['full'] . '<br>Le fichier ' . $pdf_stored["file"] . ' a bien été généré, <a href="javascript:window.close();">fermer cette fenêtre</a>.</body></html>';
+            echo '<html><head><meta charset="UTF-8"></head><body><script>window.close();</script><body></html>';
         else
-            echo 'Un problème est survenu lors de la génération <a href="javascript:window.close();">fermer cette fenêtre</a>.';
+            echo '<html><head><meta charset="UTF-8"></head><body>Un problème est survenu lors de la génération <a href="javascript:window.close();">fermer cette fenêtre</a>.<body></html>';
         die;
     });
 

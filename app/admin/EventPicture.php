@@ -2,7 +2,7 @@
 
 Admin::model(App\EventPicture::class)->title('Images des événements')->alias('EventPicture')->display(function ()
 {
-    $display = AdminDisplay::datatablesAsync();
+    $display = AdminDisplay::datatables();
 
     $display->filters([
         Filter::field('event_id')->title(function ($value)
