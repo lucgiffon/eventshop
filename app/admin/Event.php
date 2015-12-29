@@ -5,7 +5,9 @@ Admin::model(App\Event::class)->title('Evénements')->alias('Event')->display(fu
     $display = AdminDisplay::datatablesAsync();
     $display->with('participant', 'eventpicture');
     $display->order([[1, 'ASC']]);
-
+    $display->filters([
+        Filter::related('id')->model('App\Event'),
+    ]);
     $display->columns([
         Column::string('title')->label('Titre'),
         Column::image('logo')->label('Logo'),

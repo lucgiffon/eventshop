@@ -54,9 +54,9 @@ class Event extends Model
 //        'updated_at'
 //    ];
 
-    public function event()
+    public function message()
     {
-        return $this->belongsTo('App\Message');
+        return $this->hasOne('App\Message');
     }
 
     public function participant()
