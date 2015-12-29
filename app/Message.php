@@ -18,7 +18,7 @@ class Message extends Model
 
     public function event()
     {
-        return $this->hasOne('App\Event');
+        return $this->belongsTo('App\Event');
     }
 
 //    protected $hidden = [
