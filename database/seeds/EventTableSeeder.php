@@ -83,7 +83,7 @@ class EventTableSeeder extends Seeder
                 $beginDate = $this->randDate("PAST");
                 $endDate = $this->randDate("NOW");
             }
-            if ($i % 33 == 0)
+            if ($i % 32 == 0)
             {
                 $selected = True;
             }

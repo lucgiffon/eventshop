@@ -54,6 +54,11 @@ class Event extends Model
 //        'updated_at'
 //    ];
 
+    public function event()
+    {
+        return $this->belongsTo('App\Message');
+    }
+
     public function participant()
     {
         return $this->belongsToMany('App\Participant');
