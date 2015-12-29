@@ -58,14 +58,12 @@
                 <div class="form-inline  pull-right">
                     <div class="form-group">
                         <select class="form-control" title="id événement" id="idEventForEat">
-                            <option selected="selected" disabled="disabled">titre de l'événement</option>
                             @foreach($eventAll as $event)
-                                <option value="{{ $event->id }}">{{ $event->title }}</option>
+                                <option @if($event->id == 3 ) selected="selected" @endif value="{{ $event->id }}">{{ $event->title }}</option>
                             @endforeach
                         </select>
                         <select class="form-control" title="nombre jour"  id="nbrDayForEat">
-                            <option selected="selected" disabled="disabled">nombre de jour</option>
-                            <option value="7">une semaine</option>
+                            <option selected="selected" value="7">une semaine</option>
                             <option value="14">deux semaines</option>
                             <option value="30">un mois</option>
                             <option value="90">trois mois</option>

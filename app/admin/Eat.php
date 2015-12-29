@@ -37,10 +37,10 @@ Admin::model(App\Eat::class)->title('Repas')->alias('Eat')->display(function ()
     $form->items([
         FormItem::columns()->columns([
             [
-                FormItem::text('event.title', 'AFAIRE')->required(),
+                FormItem::select('event_id', 'Evénement')->model('App\Event')->display('title'),
             ],
             [
-                FormItem::text('participant.firstname', 'AFAIRE')->required(),
+                FormItem::select('participant_id', 'Participant')->model('App\Participant')->display('fullname'),
             ],
             [
                 FormItem::date('date', 'Date')->format('d/m/Y'),
